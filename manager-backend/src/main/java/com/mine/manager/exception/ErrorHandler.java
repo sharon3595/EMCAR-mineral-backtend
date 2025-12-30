@@ -36,10 +36,26 @@ public class ErrorHandler {
     /*
      * Error for message not readable  (Code: 400)
      * */
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public  ResponseEntity<ErrorResponse> handlerMessageNotReadableException(HttpServletRequest req, Exception ex){
+    /*@ExceptionHandler(HttpMessageNotReadableException.class)
+    public  ResponseEntity<ErrorResponse> handlerMessageNotReadableException(HttpServletRequest req, Exception ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ErrorResponse response = new ErrorResponse(status.value(), status.name(), ex.getMessage(), req.getRequestURI());
+        return ResponseEntity.status(status).body(response);
+    }*/
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handlerMessageNotReadableException(HttpServletRequest req, HttpMessageNotReadableException ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        Throwable rootCause = ex.getMostSpecificCause();
+        String errorMessage;
+
+        if (rootCause instanceof com.mine.manager.exception.PropertyNotFoundException) {
+            errorMessage = rootCause.getMessage();
+        } else {
+            errorMessage = "El formato de la petición es incorrecto o contiene valores inválidos.";
+        }
+
+        ErrorResponse response = new ErrorResponse(status.value(), status.name(), errorMessage, req.getRequestURI());
         return ResponseEntity.status(status).body(response);
     }
 

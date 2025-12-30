@@ -11,38 +11,49 @@ import com.mine.manager.parameters.presentation.request.dto.TypeMaterialDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @AllArgsConstructor
 public class TypeMaterialServiceImpl extends CRUDServiceImpl<TypeMaterial, Integer> implements TypeMaterialService {
 
 
-    private final TypeMaterialRepository typeTypeMaterialRepository;
-    private final TypeMaterialMapper typeTypeMaterialMapper;
-    private static final String MINE_ENTITY = SpanishEntityNameProvider.getSpanishName("TypeMaterial");
+    private final TypeMaterialRepository typeMaterialRepository;
+    private final TypeMaterialMapper typeMaterialMapper;
+    private static final String TYPE_MATERIAL = SpanishEntityNameProvider.getSpanishName(TypeMaterial.class.getSimpleName());
 
 
     @Override
     protected GenericRepository<TypeMaterial, Integer> getRepository() {
-        return typeTypeMaterialRepository;
+        return typeMaterialRepository;
     }
 
 
     @Override
     public TypeMaterial create(TypeMaterialDto dto) {
-        if(typeTypeMaterialRepository.existsByName(dto.getName())){
-            throw new DuplicateException(MINE_ENTITY, "Nombre", dto.getName());
+        if(typeMaterialRepository.existsByName(dto.getName())){
+            throw new DuplicateException(TYPE_MATERIAL, "Nombre", dto.getName());
         }
-        return super.create(typeTypeMaterialMapper.fromDto(dto));
+        return super.create(typeMaterialMapper.fromDto(dto));
     }
 
 
     @Override
     public TypeMaterial update(Integer id, TypeMaterialDto dto) {
-        if(typeTypeMaterialRepository.existsByNameAndIdNot(dto.getName(), id)){
-            throw new DuplicateException(MINE_ENTITY, "Nombre", dto.getName());
+        if(typeMaterialRepository.existsByNameAndIdNot(dto.getName(), id)){
+            throw new DuplicateException(TYPE_MATERIAL, "Nombre", dto.getName());
         }
-        return typeTypeMaterialRepository.save(typeTypeMaterialMapper.fromDto(dto, super.getById(id)));
+        return typeMaterialRepository.save(typeMaterialMapper.fromDto(dto, super.getById(id)));
+    }
+
+    @Override
+    public List<TypeMaterial> getFilteredForSelect(String name, String description, String some) {
+        String cleanName = (name != null && !name.isBlank()) ? name : null;
+        String cleanDesc = (description != null && !description.isBlank()) ? description : null;
+        String cleanSome = (some != null && !some.isBlank()) ? some : null;
+
+        return typeMaterialRepository.searchByFilters(cleanName, cleanDesc, cleanSome);
     }
 }
 

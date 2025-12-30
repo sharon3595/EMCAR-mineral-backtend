@@ -1,5 +1,6 @@
 package com.mine.manager.parameters.presentation.controller;
 
+import com.mine.manager.parameters.domain.entity.Mine;
 import com.mine.manager.parameters.domain.entity.TypeMaterial;
 import com.mine.manager.parameters.domain.service.Interfaces.TypeMaterialService;
 import com.mine.manager.parameters.presentation.request.dto.TypeMaterialDto;
@@ -61,6 +62,16 @@ public class TypeMaterialController {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         typeMaterialService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+
+    @GetMapping("/select")
+    public ResponseEntity<List<TypeMaterial>> getFilteredForSelect(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) String some) {
+        List<TypeMaterial> typeMaterials = typeMaterialService.getFilteredForSelect(name,description,some);
+        return ResponseEntity.status(HttpStatus.OK).body(typeMaterials);
     }
 }
 

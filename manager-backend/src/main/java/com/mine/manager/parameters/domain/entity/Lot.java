@@ -1,5 +1,6 @@
 package com.mine.manager.parameters.domain.entity;
 
+import com.mine.manager.common.enums.LotTypeEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Lot extends Base {
     private Integer initialDocNumber;
     private Integer currentDocNumber;
     @Column(length = 10)
-    private String assignment;
+    @Enumerated(EnumType.STRING)
+    private LotTypeEnum assignment;
     private Boolean state;
 }

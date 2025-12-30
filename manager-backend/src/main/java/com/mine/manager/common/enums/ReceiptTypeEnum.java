@@ -1,5 +1,6 @@
 package com.mine.manager.common.enums;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.mine.manager.exception.PropertyNotFoundException;
@@ -8,28 +9,28 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum SupplierGroupEnum {
+public enum ReceiptTypeEnum {
 
-    CLIENT("Cliente"),
-    PERSONAL("Personal");
+    MANUAL("Manual"),
+    SYSTEM("Sistema");
 
     private final String value;
 
     @JsonCreator
-    public static SupplierGroupEnum fromString(String text) {
+    public static ReceiptTypeEnum fromString(String text) {
         if (text == null || text.isBlank()) {
             return null;
         }
         try {
-            return SupplierGroupEnum.valueOf(text.toUpperCase());
+            return ReceiptTypeEnum.valueOf(text.toUpperCase());
         } catch (IllegalArgumentException e) {
         }
-        for (SupplierGroupEnum type : SupplierGroupEnum.values()) {
+        for (ReceiptTypeEnum type : ReceiptTypeEnum.values()) {
             if (type.getValue().equalsIgnoreCase(text)) {
                 return type;
             }
         }
-        throw new PropertyNotFoundException(text, "Grupo");
+        throw new PropertyNotFoundException(text, "Tipo recibo");
     }
 
     @JsonValue

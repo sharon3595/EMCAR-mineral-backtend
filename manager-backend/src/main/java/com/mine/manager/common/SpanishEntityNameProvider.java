@@ -1,6 +1,6 @@
 package com.mine.manager.common;
 
-import com.mine.manager.util.Entities; // Importa tu nueva clase de constantes
+import com.mine.manager.util.Entities;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,18 +13,18 @@ public class SpanishEntityNameProvider {
 
     static {
         // Entidades del dominio Minero
-        NAME_MAP.put("Supplier", Entities.SUPPLIERS);
-        NAME_MAP.put("Batch", Entities.BATCHES);
-        NAME_MAP.put("Mine", Entities.MINES);
-        NAME_MAP.put("Cooperative", Entities.COOPERATIVES);
+        NAME_MAP.put("Supplier", Entities.SUPPLIER);
+        NAME_MAP.put("Lot", Entities.LOT);
+        NAME_MAP.put("Mine", Entities.MINE);
+        NAME_MAP.put("Cooperative", Entities.COOPERATIVE);
         NAME_MAP.put("Company", Entities.COMPANY);
         NAME_MAP.put("Material", Entities.MATERIAL);
         NAME_MAP.put("MaterialType", Entities.MATERIAL_TYPE);
-        NAME_MAP.put("Load", Entities.LOADS);
-        NAME_MAP.put("Advance", Entities.ADVANCES);
-        NAME_MAP.put("Liquidation", Entities.LIQUIDATIONS);
+        NAME_MAP.put("Load", Entities.LOAD);
+        NAME_MAP.put("Advance", Entities.ADVANCE);
+        NAME_MAP.put("Liquidation", Entities.LIQUIDATION);
 
-        NAME_MAP.put("User", Entities.USERS);
+        NAME_MAP.put("User", Entities.USER);
         NAME_MAP.put("Role", "Rol");
     }
 

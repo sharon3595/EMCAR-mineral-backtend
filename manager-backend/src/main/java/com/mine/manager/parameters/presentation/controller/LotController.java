@@ -1,21 +1,31 @@
 package com.mine.manager.parameters.presentation.controller;
 
+import com.mine.manager.common.enums.LotTypeEnum;
 import com.mine.manager.parameters.domain.entity.Lot;
 import com.mine.manager.parameters.domain.service.Interfaces.LotService;
 import com.mine.manager.parameters.presentation.request.dto.LotDto;
+import com.mine.manager.parameters.presentation.request.filter.LoadFilter;
+import com.mine.manager.parameters.presentation.request.filter.LotFilter;
+import com.mine.manager.parameters.presentation.response.pojo.LoadPojo;
+import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/lots")
@@ -52,7 +62,7 @@ public class LotController {
             @ApiResponse(responseCode = "200", description = "Lote actualizado")})
     @PutMapping("/{id}")
     public ResponseEntity<Lot> update(@PathVariable Integer id,
-                                          @Valid @RequestBody LotDto dto) {
+                                      @Valid @RequestBody LotDto dto) {
         return ResponseEntity.status(HttpStatus.OK).body(lotService.update(id, dto));
     }
 
@@ -82,17 +92,62 @@ public class LotController {
     }
 
 
-    /*@Operation(summary = "Obtener correlativo general por ID de loto de compañia, periodo mensual y departamento")
-    @GetMapping("/correlative")
-    public ResponseEntity<GeneralCorrelativePojo> getCorrelative(
-            @RequestParam(required = false) Integer lotId,
-            @RequestParam(required = false) LocalDate date,
-            @RequestParam(required = false) Integer companyDepartmentId
+    @Operation(summary = "Listar cargas aplicando filtros.")
+    @GetMapping("/search")
+    public ResponseEntity<List<Lot>> getFiltered(
+            @RequestParam(required = false) Integer id,
+            @RequestParam(required = false) String prefix,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Integer initialDocNumber,
+            @RequestParam(required = false) Integer currentDocNumber,
+            @RequestParam(required = false) String assignment,
+            @RequestParam(required = false) Boolean state
     ) {
 
+        LotFilter filter = new LotFilter(
+                id,
+                prefix,
+                description,
+                initialDocNumber,
+                currentDocNumber,
+                assignment,
+                state
+        );
+        List<Lot> listFiltered = lotService.getFiltered(filter);
+        return ResponseEntity.status(HttpStatus.OK).body(listFiltered);
+    }
 
-        GeneralCorrelativePojo correlative = lotService.getCodeCorrelative(lotId, date,
-                companyDepartmentId);
-        return ResponseEntity.status(HttpStatus.OK).body(correlative);
-    }*/
+
+    @Operation(summary = "Devolver paginador aplicando filtros.")
+    @GetMapping("/pageable")
+    public ResponseEntity<PagePojo<Lot>> getByPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortOrder,
+            @RequestParam(required = false) Integer id,
+            @RequestParam(required = false) String prefix,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Integer initialDocNumber,
+            @RequestParam(required = false) Integer currentDocNumber,
+            @RequestParam(required = false) String assignment,
+            @RequestParam(required = false) Boolean state
+    ) {
+
+        LotFilter filter = new LotFilter(
+                id,
+                prefix,
+                description,
+                initialDocNumber,
+                currentDocNumber,
+                assignment,
+                state
+        );
+
+        PagePojo<Lot> pageResult = lotService.getByPageAndFilters(
+                page, size, sortBy, sortOrder, filter
+        );
+
+        return ResponseEntity.ok(pageResult);
+    }
 }

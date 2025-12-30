@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Tag(name = "Mine Service", description = "Módulo para gestionar las Minas")
@@ -55,4 +56,14 @@ public class MineController {
         mineService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @GetMapping("/select")
+    public ResponseEntity<List<Mine>> getFilteredForSelect(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) String some) {
+        List<Mine> mines = mineService.getFilteredForSelect(name,description,some);
+        return ResponseEntity.status(HttpStatus.OK).body(mines);
+    }
+
 }

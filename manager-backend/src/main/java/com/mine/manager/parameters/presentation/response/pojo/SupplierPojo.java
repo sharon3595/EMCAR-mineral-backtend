@@ -45,7 +45,7 @@ public class SupplierPojo {
         this.fullName = StringUtil.concatenate(supplier.getName(),supplier.getSurname()," ").trim();
         this.documentNumber = supplier.getDocumentNumber();
         this.address = supplier.getAddress();
-        this.supplierGroup = supplier.getSupplierGroup();
+        this.supplierGroup = supplier.getSupplierGroup().getValue();
         this.expeditionPlace = supplier.getExpeditionPlace();
     }
 }

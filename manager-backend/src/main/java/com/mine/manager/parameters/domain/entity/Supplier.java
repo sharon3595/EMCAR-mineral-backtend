@@ -1,5 +1,6 @@
 package com.mine.manager.parameters.domain.entity;
 
+import com.mine.manager.common.enums.SupplierGroupEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,8 +29,8 @@ public class Supplier extends Base{
   @Column(length = 200)
   private String address;
 
-  @Column(length = 150, nullable = false)
-  private String supplierGroup;
+  @Column(length = 20, nullable = false)
+  private SupplierGroupEnum supplierGroup;
 
   @Column(length = 20/*, nullable = false*/)
   private String expeditionPlace;

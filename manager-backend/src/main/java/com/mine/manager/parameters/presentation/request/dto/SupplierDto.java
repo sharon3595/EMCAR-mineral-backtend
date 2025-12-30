@@ -1,6 +1,8 @@
 package com.mine.manager.parameters.presentation.request.dto;
 
+import com.mine.manager.common.enums.SupplierGroupEnum;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +26,8 @@ public class SupplierDto {
     @Size(max = 200, message = "{supplier.address.size}")
     private String address;
 
-    @NotBlank(message = "{supplier.supplierGroup.not-blank}")
-    @Size(max = 150, message = "{supplier.supplierGroup.size}")
-    private String supplierGroup;
+    @NotNull(message = "{supplier.supplierGroup.not-null}")
+    private SupplierGroupEnum supplierGroup;
 
     @Size(max = 20, message = "{supplier.expeditionPlace.size}")
     private String expeditionPlace;

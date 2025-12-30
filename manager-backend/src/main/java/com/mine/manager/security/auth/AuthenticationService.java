@@ -53,6 +53,7 @@ public class AuthenticationService {
                     .map(Permission::getPermission)
                     .toList()
     );
+    extraClaims.put("userId", user.getId());
     var jwtToken = jwtService.generateToken(extraClaims, user);
     return AuthenticationResponse.builder().token(jwtToken).build();
   }
