@@ -16,17 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
-@Tag(name = "Logs", description = "Operaciones para descargar o visualizar los logs")
+@Tag(name = "Logs", description = "Operaciones para visualizar los logs")
 @RestController
 @RequestMapping("/log")
 public class LogController {
 
-  @GetMapping("/downloadLogs")
-  public ResponseEntity<Resource> downloadLogFile() {
-    return this.processLog(false);
-  }
-
-  @GetMapping("/openLogs")
+  @GetMapping("/view")
   public ResponseEntity<Resource> openLogFile() {
     return this.processLog(true);
   }
@@ -38,10 +33,10 @@ public class LogController {
       Resource resource = new UrlResource(path.toUri());
       if (resource.exists() && resource.isReadable()) {
         return ResponseEntity.ok()
-            .contentType(MediaType.parseMediaType("text/plain"))
-            .header(HttpHeaders.CONTENT_DISPOSITION,
-                isOpening ? "inline" : "attachment; filename=\"" + resource.getFilename() + "\"")
-            .body(resource);
+                .contentType(MediaType.parseMediaType("text/plain"))
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        isOpening ? "inline" : "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
       } else {
         throw new EntityNotFoundException("No se encontró el log");
       }

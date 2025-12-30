@@ -19,6 +19,11 @@ spring:
         hbm2ddl.create_namespaces: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  file:
+    name: logs/spring.log
+  level:
+    root: INFO
 application:
   security:
     jwt:

@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/company")
-@Tag(name = "Controlador de empresas", description = "Módulo para gestionar las empresas")
+@Tag(name = "Company Service", description = "Módulo para gestionar las empresas")
 public class CompanyController {
 
     private final CompanyService companyService;
