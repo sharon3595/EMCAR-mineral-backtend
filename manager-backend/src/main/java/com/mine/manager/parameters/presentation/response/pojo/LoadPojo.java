@@ -30,6 +30,13 @@ public class LoadPojo {
     private BigDecimal weight;
     private String observation;
 
+    private String supplierName;
+    private String lotDescription;
+    private String materialName;
+    private String typeMaterialName;
+    private String mineName;
+    private String cooperativeName;
+
     public LoadPojo(Load load) {
         this.id = load.getId();
         this.active = load.getActive();
@@ -45,12 +52,38 @@ public class LoadPojo {
         this.weight = load.getWeight();
         this.observation = load.getObservation();
 
-        this.supplierId = (load.getSupplier() != null) ? load.getSupplier().getId() : null;
-        this.lotId = (load.getLot() != null) ? load.getLot().getId() : null;
-        this.materialId = (load.getMaterial() != null) ? load.getMaterial().getId() : null;
-        this.typeMaterialId = (load.getTypeMaterial() != null) ? load.getTypeMaterial().getId() : null;
+        if (load.getSupplier() != null) {
+            this.supplierId = load.getSupplier().getId();
+            this.supplierName = load.getSupplier().getName()
+                    + (load.getSupplier().getSurname() != null ? " " + load.getSupplier().getSurname() : "");
+        }
 
-        this.mineId = (load.getMine() != null) ? load.getMine().getId() : null;
-        this.cooperativeId = (load.getCooperative() != null) ? load.getCooperative().getId() : null;
+        if (load.getLot() != null) {
+            this.lotId = load.getLot().getId();
+            this.lotDescription = load.getLot().getDescription();
+        }
+
+
+        if (load.getMaterial() != null) {
+            this.materialId = load.getMaterial().getId();
+            this.materialName = load.getMaterial().getName();
+        }
+
+        if (load.getTypeMaterial() != null) {
+            this.typeMaterialId = load.getTypeMaterial().getId();
+            this.typeMaterialName = load.getTypeMaterial().getName();
+        }
+
+        if (load.getMine() != null) {
+            this.mineId = load.getMine().getId();
+            this.mineName = load.getMine().getName();
+        }
+
+        if (load.getCooperative() != null) {
+            this.cooperativeId = load.getCooperative().getId();
+            this.cooperativeName = load.getCooperative().getName();
+        }
+
+
     }
 }
