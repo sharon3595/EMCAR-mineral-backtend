@@ -23,6 +23,10 @@ import org.springframework.context.annotation.Configuration;
         ),
         servers = {
                 @Server(
+                        description = "Servidor Producción (Render)",
+                        url = "https://emcar-mineral-backtend.onrender.com"
+                ),
+                @Server(
                         description = "Servidor Local",
                         url = "http://localhost:8080"
                 )
