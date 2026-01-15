@@ -9,11 +9,13 @@ import com.mine.manager.parameters.domain.service.Interfaces.AdvanceService;
 import com.mine.manager.parameters.domain.service.Interfaces.LoadService;
 import com.mine.manager.parameters.presentation.request.dto.AdvanceDto;
 import com.mine.manager.parameters.presentation.response.pojo.AdvancePojo;
+import com.mine.manager.parameters.presentation.response.pojo.TotalAdvancesByLoadPojo;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -85,6 +87,12 @@ public class AdvanceServiceImpl extends CRUDServiceImpl<Advance, Integer> implem
     @Override
     public List<AdvancePojo> getAdvancesByLoadId(Integer id) {
         return advanceRepository.findAllByLoadIdAndActiveIsTrue(id).stream().map(AdvancePojo::new).toList();
+    }
+
+    @Override
+    public TotalAdvancesByLoadPojo getTotalAdvancesByLoad(Integer loadId) {
+        BigDecimal total = advanceRepository.sumAmountByLoadId(loadId);
+        return new TotalAdvancesByLoadPojo(loadId, total);
     }
 
     private Advance convertToEntity(AdvanceDto dto) {

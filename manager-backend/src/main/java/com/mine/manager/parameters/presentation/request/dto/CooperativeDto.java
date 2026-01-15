@@ -1,10 +1,10 @@
 package com.mine.manager.parameters.presentation.request.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @Data
@@ -13,33 +13,40 @@ public class CooperativeDto {
     @NotBlank(message = "{cooperativeDto.name.not-blank}")
     private String name;
 
-    @Min(value = 0, message = "{cooperativeDto.percentage.range}")
-    @Max(value = 100, message = "{cooperativeDto.percentage.range}")
-    private Integer cajaNacional = 0;
+    @DecimalMin(value = "0.00", message = "{cooperativeDto.percentage.range}")
+    @DecimalMax(value = "100.00", message = "{cooperativeDto.percentage.range}")
+    @Digits(integer = 3, fraction = 2, message = "{cooperativeDto.percentage.digits}")
+    private BigDecimal cajaNacional = BigDecimal.ZERO;
 
-    @Min(value = 0, message = "{cooperativeDto.percentage.range}")
-    @Max(value = 100, message = "{cooperativeDto.percentage.range}")
-    private Integer fedecomin = 0;
+    @DecimalMin(value = "0.00", message = "{cooperativeDto.percentage.range}")
+    @DecimalMax(value = "100.00", message = "{cooperativeDto.percentage.range}")
+    @Digits(integer = 3, fraction = 2, message = "{cooperativeDto.percentage.digits}")
+    private BigDecimal fedecomin = BigDecimal.ZERO;
 
-    @Min(value = 0, message = "{cooperativeDto.percentage.range}")
-    @Max(value = 100, message = "{cooperativeDto.percentage.range}")
-    private Integer fencomin = 0;
+    @DecimalMin(value = "0.00", message = "{cooperativeDto.percentage.range}")
+    @DecimalMax(value = "100.00", message = "{cooperativeDto.percentage.range}")
+    @Digits(integer = 3, fraction = 2, message = "{cooperativeDto.percentage.digits}")
+    private BigDecimal fencomin = BigDecimal.ZERO;
 
-    @Min(value = 0, message = "{cooperativeDto.percentage.range}")
-    @Max(value = 100, message = "{cooperativeDto.percentage.range}")
-    private Integer comibol = 0;
+    @DecimalMin(value = "0.00", message = "{cooperativeDto.percentage.range}")
+    @DecimalMax(value = "100.00", message = "{cooperativeDto.percentage.range}")
+    @Digits(integer = 3, fraction = 2, message = "{cooperativeDto.percentage.digits}")
+    private BigDecimal comibol = BigDecimal.ZERO;
 
-    @Min(value = 0, message = "{cooperativeDto.percentage.range}")
-    @Max(value = 100, message = "{cooperativeDto.percentage.range}")
-    private Integer wilstermann = 0;
+    @DecimalMin(value = "0.00", message = "{cooperativeDto.percentage.range}")
+    @DecimalMax(value = "100.00", message = "{cooperativeDto.percentage.range}")
+    @Digits(integer = 3, fraction = 2, message = "{cooperativeDto.percentage.digits}")
+    private BigDecimal wilstermann = BigDecimal.ZERO;
 
-    @Min(value = 0, message = "{cooperativeDto.percentage.range}")
-    @Max(value = 100, message = "{cooperativeDto.percentage.range}")
-    private Integer cooperativeContribution = 0;
+    @DecimalMin(value = "0.00", message = "{cooperativeDto.percentage.range}")
+    @DecimalMax(value = "100.00", message = "{cooperativeDto.percentage.range}")
+    @Digits(integer = 3, fraction = 2, message = "{cooperativeDto.percentage.digits}")
+    private BigDecimal cooperativeContribution = BigDecimal.ZERO;
 
-    @Min(value = 0, message = "{cooperativeDto.percentage.range}")
-    @Max(value = 100, message = "{cooperativeDto.percentage.range}")
-    private Integer miningRoyalties = 0;
+    @DecimalMin(value = "0.00", message = "{cooperativeDto.percentage.range}")
+    @DecimalMax(value = "100.00", message = "{cooperativeDto.percentage.range}")
+    @Digits(integer = 3, fraction = 2, message = "{cooperativeDto.percentage.digits}")
+    private BigDecimal miningRoyalties = BigDecimal.ZERO;
     private Boolean printCajaNacional = false;
     private Boolean printFedecomin = false;
     private Boolean printFencomin = false;

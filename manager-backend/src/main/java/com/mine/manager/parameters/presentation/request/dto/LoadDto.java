@@ -44,14 +44,15 @@ public class LoadDto {
     @Schema(description = "Código correlativo interno", example = "INT-001-A")
     private String correlativeLotCode;
 
-    @NotNull(message = "{load.numberSacks.not-null}")
     @PositiveOrZero(message = "{load.numberSacks.positive}")
-    @Schema(description = "Cantidad de sacos", example = "50.0")
-    private BigDecimal numberSacks;
+    @Digits(integer = 15, fraction = 2, message = "{load.numberSacks.digits}")
+    @Schema(description = "Cantidad de sacos", example = "50.50")
+    private BigDecimal numberSacks = BigDecimal.ZERO;
 
     @NotNull(message = "{load.weight.not-null}")
     @Positive(message = "{load.weight.positive}")
-    @Schema(description = "Peso bruto de la carga", example = "1250.50")
+    @Digits(integer = 15, fraction = 3, message = "{load.weight.digits}")
+    @Schema(description = "Peso bruto de la carga", example = "1250.500")
     private BigDecimal weight;
 
     @Size(max = 500, message = "{load.observation.size}")

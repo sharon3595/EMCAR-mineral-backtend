@@ -1,11 +1,10 @@
 package com.mine.manager.parameters.presentation.controller;
 
-import com.mine.manager.parameters.domain.entity.Load;
-import com.mine.manager.parameters.domain.service.Interfaces.LoadService;
-import com.mine.manager.parameters.presentation.request.dto.LoadDto;
-import com.mine.manager.parameters.presentation.request.filter.LoadFilter;
-import com.mine.manager.parameters.presentation.response.pojo.CorrelativePojo;
-import com.mine.manager.parameters.presentation.response.pojo.LoadPojo;
+import com.mine.manager.parameters.domain.entity.Liquidation;
+import com.mine.manager.parameters.domain.service.Interfaces.LiquidationService;
+import com.mine.manager.parameters.presentation.request.dto.LiquidationDto;
+import com.mine.manager.parameters.presentation.request.filter.LiquidationFilter;
+import com.mine.manager.parameters.presentation.response.pojo.LiquidationPojo;
 import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,80 +21,76 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+
 @AllArgsConstructor
 @RestController
-@RequestMapping("/loads")
-@Tag(name = "Load Service", description = "Módulo para gestionar la recepción de carga")
-public class LoadController {
+@RequestMapping("/liquidations")
+@Tag(name = "Liquidation Service", description = "Módulo para gestionar las liquidaciones")
+public class LiquidationController {
 
-    private final LoadService loadService;
 
-    @Operation(summary = "Obtener todos las cargas")
+    private final LiquidationService liquidationService;
+
+
+    @Operation(summary = "Obtener todas las liquidaciones")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Todos las cargas", content = @Content)})
+            @ApiResponse(responseCode = "200", description = "Todas las liquidaciones", content = @Content)})
     @GetMapping
-    public ResponseEntity<List<LoadPojo>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(loadService.getLoads());
+    public ResponseEntity<List<LiquidationPojo>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(liquidationService.getLiquidations());
     }
 
 
-    @Operation(summary = "Crear nueva carga")
+    @Operation(summary = "Crear nueva liquidación")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Nueva carga",
+            @ApiResponse(responseCode = "201", description = "Nueva liquidación",
                     content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = Load.class))}),
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Liquidation.class))}),
             @ApiResponse(responseCode = "400", description = "Entrada invalida", content = @Content)})
     @PostMapping
-    public ResponseEntity<LoadPojo> create(@Valid @RequestBody LoadDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(loadService.create(dto));
+    public ResponseEntity<LiquidationPojo> create(@Valid @RequestBody LiquidationDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(liquidationService.create(dto));
     }
 
 
-    @Operation(summary = "Actualizar carga")
+    @Operation(summary = "Actualizar liquidación")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Carga actualizada")})
+            @ApiResponse(responseCode = "200", description = "liquidación actualizada")})
     @PutMapping("/{id}")
-    public ResponseEntity<LoadPojo> update(@PathVariable Integer id,
-                                       @Valid @RequestBody LoadDto dto) {
-        return ResponseEntity.status(HttpStatus.OK).body(loadService.update(id, dto));
+    public ResponseEntity<LiquidationPojo> update(@PathVariable Integer id,
+                                                  @Valid @RequestBody LiquidationDto dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(liquidationService.update(id, dto));
     }
 
 
-    @Operation(summary = "Obtener carga por su Id")
+    @Operation(summary = "Obtener liquidación por su Id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Carga encontrada",
+            @ApiResponse(responseCode = "200", description = "liquidación encontrada",
                     content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = Load.class))}),
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Liquidation.class))}),
             @ApiResponse(responseCode = "400", description = "ID incorrecto", content = @Content),
-            @ApiResponse(responseCode = "404", description = "Carga no encontrada", content = @Content)})
+            @ApiResponse(responseCode = "404", description = "liquidación no encontrada", content = @Content)})
     @GetMapping("/{id}")
-    public ResponseEntity<LoadPojo> getById(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(loadService.getLoadById(id));
+    public ResponseEntity<LiquidationPojo> getById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(liquidationService.getLiquidationById(id));
     }
 
 
-    @Operation(summary = "Eliminar carga por su ID")
+    @Operation(summary = "Eliminar liquidación por su ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Carga eliminado"),
+            @ApiResponse(responseCode = "204", description = "liquidación eliminada"),
             @ApiResponse(responseCode = "400", description = "Id incorrecto", content = @Content)
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Integer id) {
-        loadService.delete(id);
+        liquidationService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/correlative/preview/{lotId}")
-    @Operation(summary = "Obtener el siguiente código correlativo disponible (Previsualización)")
-    public ResponseEntity<CorrelativePojo> getNextCorrelative(@PathVariable Integer lotId) {
-        return ResponseEntity.ok(loadService.processCorrelative(lotId, false));
-    }
 
-
-
-    @Operation(summary = "Listar cargas aplicando filtros.")
+    @Operation(summary = "Listar liquidaciones aplicando filtros.")
     @GetMapping("/search")
-    public ResponseEntity<List<LoadPojo>> getFiltered(
+    public ResponseEntity<List<LiquidationPojo>> getFiltered(
             @RequestParam(required = false) String supplierName,
             @RequestParam(required = false) String correlativeLotCode,
             @RequestParam(required = false) LocalDate startDate,
@@ -104,22 +99,22 @@ public class LoadController {
             @RequestParam(required = false) String some
     ) {
 
-        LoadFilter filter = new LoadFilter(
+
+        LiquidationFilter filter = new LiquidationFilter(
                 supplierName,
                 correlativeLotCode,
                 startDate,
                 endDate,
-                lotDescription,
                 some
         );
-        List<LoadPojo> listFiltered = loadService.getFiltered(filter);
+        List<LiquidationPojo> listFiltered = liquidationService.getFiltered(filter);
         return ResponseEntity.status(HttpStatus.OK).body(listFiltered);
     }
 
 
     @Operation(summary = "Devolver paginador aplicando filtros.")
     @GetMapping("/pageable")
-    public ResponseEntity<PagePojo<LoadPojo>> getByPage(
+    public ResponseEntity<PagePojo<LiquidationPojo>> getByPage(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
@@ -132,19 +127,22 @@ public class LoadController {
             @RequestParam(required = false) String some
     ) {
 
-        LoadFilter filter = new LoadFilter(
+
+        LiquidationFilter filter = new LiquidationFilter(
                 supplierName,
                 correlativeLotCode,
                 startDate,
                 endDate,
-                lotDescription,
                 some
         );
 
-        PagePojo<LoadPojo> pageResult = loadService.getByPageAndFilters(
+
+        PagePojo<LiquidationPojo> pageResult = liquidationService.getByPageAndFilters(
                 page, size, sortBy, sortOrder, filter
         );
+
 
         return ResponseEntity.ok(pageResult);
     }
 }
+

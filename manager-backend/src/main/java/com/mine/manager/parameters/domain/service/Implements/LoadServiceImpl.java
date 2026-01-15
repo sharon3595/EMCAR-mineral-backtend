@@ -2,19 +2,19 @@ package com.mine.manager.parameters.domain.service.Implements;
 
 import com.mine.manager.common.SpanishEntityNameProvider;
 import com.mine.manager.common.SpecificationUtils;
-import com.mine.manager.common.enums.sortByPageable.SupplierPojoEnum;
+import com.mine.manager.common.enums.StateLoadEnum;
 import com.mine.manager.exception.EntityNotFoundException;
 import com.mine.manager.parameters.data.repository.GenericRepository;
 import com.mine.manager.parameters.data.repository.LoadRepository;
 import com.mine.manager.parameters.domain.entity.Load;
 import com.mine.manager.parameters.domain.entity.Lot;
-import com.mine.manager.parameters.domain.entity.Supplier;
 import com.mine.manager.parameters.domain.mapper.LoadMapper;
 import com.mine.manager.parameters.domain.service.Interfaces.*;
 import com.mine.manager.parameters.presentation.request.dto.LoadDto;
 import com.mine.manager.parameters.presentation.request.filter.LoadFilter;
-import com.mine.manager.parameters.presentation.request.filter.SupplierFilter;
-import com.mine.manager.parameters.presentation.response.pojo.*;
+import com.mine.manager.parameters.presentation.response.pojo.CorrelativePojo;
+import com.mine.manager.parameters.presentation.response.pojo.LoadPojo;
+import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
 import com.mine.manager.util.CodeGeneratorUtil;
 import com.mine.manager.util.FieldsFilterUtil;
 import com.mine.manager.util.StringUtil;
@@ -28,7 +28,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -69,6 +68,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
         this.updateEntities(dto, load, false);
         CorrelativePojo correlative = this.processCorrelative(load.getLot().getId(), true);
         load.setCorrelativeLotCode(correlative.getCorrelative());
+        load.setState(StateLoadEnum.PENDING);
         Load savedLoad = loadRepository.save(load);
         return loadMapper.toPojo(savedLoad);
     }

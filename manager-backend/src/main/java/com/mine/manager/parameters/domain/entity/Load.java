@@ -1,5 +1,6 @@
 package com.mine.manager.parameters.domain.entity;
 
+import com.mine.manager.common.enums.StateLoadEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -51,12 +52,19 @@ public class Load extends Base{
     @JoinColumn(name = "cooperative_id")
     private Cooperative cooperative;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal numberSacks;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 15, scale = 3)
     private BigDecimal weight;
 
     @Column(length = 500)
     private String observation;
+
+    @Column(length = 10)
+    @Enumerated(EnumType.STRING)
+    private StateLoadEnum state;
+
+    @OneToOne(mappedBy = "load", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Liquidation liquidation;
 }

@@ -1,12 +1,9 @@
 package com.mine.manager.parameters.domain.mapper;
 
 import com.mine.manager.parameters.domain.entity.Load;
-import com.mine.manager.parameters.domain.entity.Supplier;
-import com.mine.manager.parameters.domain.service.Interfaces.*; // Tus interfaces de Servicio
 import com.mine.manager.parameters.presentation.request.dto.LoadDto;
 import com.mine.manager.parameters.presentation.response.pojo.LoadPojo;
 import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
-import com.mine.manager.parameters.presentation.response.pojo.SupplierPojo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;

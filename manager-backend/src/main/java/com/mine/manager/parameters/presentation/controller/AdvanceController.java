@@ -4,6 +4,7 @@ import com.mine.manager.parameters.domain.entity.Advance;
 import com.mine.manager.parameters.domain.service.Interfaces.AdvanceService;
 import com.mine.manager.parameters.presentation.request.dto.AdvanceDto;
 import com.mine.manager.parameters.presentation.response.pojo.AdvancePojo;
+import com.mine.manager.parameters.presentation.response.pojo.TotalAdvancesByLoadPojo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -87,6 +88,18 @@ public class AdvanceController {
     @GetMapping("/load/{id}")
     public ResponseEntity<List<AdvancePojo>> getAllByLoadId(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(advanceService.getAdvancesByLoadId(id));
+    }
+
+    @Operation(summary = "Obtener el monto total de los anticipos por carga")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Monto total de los anticipos por carga", content = @Content)})
+    @GetMapping("/advances/total/{loadId}")
+    public ResponseEntity<TotalAdvancesByLoadPojo> getTotalAdvancesByLoad(
+            @PathVariable Integer loadId) {
+
+        return ResponseEntity.ok(
+                advanceService.getTotalAdvancesByLoad(loadId)
+        );
     }
 }
 

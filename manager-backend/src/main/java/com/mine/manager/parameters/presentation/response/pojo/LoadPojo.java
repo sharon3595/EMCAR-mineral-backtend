@@ -37,6 +37,8 @@ public class LoadPojo {
     private String mineName;
     private String cooperativeName;
 
+    private String state;
+
     public LoadPojo(Load load) {
         this.id = load.getId();
         this.active = load.getActive();
@@ -51,6 +53,7 @@ public class LoadPojo {
         this.numberSacks = load.getNumberSacks();
         this.weight = load.getWeight();
         this.observation = load.getObservation();
+        this.state = load.getState().getValue();
 
         if (load.getSupplier() != null) {
             this.supplierId = load.getSupplier().getId();
@@ -83,7 +86,5 @@ public class LoadPojo {
             this.cooperativeId = load.getCooperative().getId();
             this.cooperativeName = load.getCooperative().getName();
         }
-
-
     }
 }
