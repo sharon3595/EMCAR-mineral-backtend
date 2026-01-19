@@ -39,8 +39,8 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
     private final LoadMapper loadMapper;
     private final SupplierService supplierService;
     private final LotService lotService;
-    private final MaterialService materialService;
-    private final TypeMaterialService typeMaterialService;
+    private final MineralService mineralService;
+    private final TypeMineralService typeMineralService;
     private final MineService mineService;
     private final CooperativeService cooperativeService;
 
@@ -79,8 +79,9 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
             load.setLot(lotService.getLotById(dto.getLotId()));
         }
         ;
-        load.setMaterial(materialService.getById(dto.getMaterialId()));
-        load.setTypeMaterial(typeMaterialService.getById(dto.getTypeMaterialId()));
+        load.setMineral(mineralService.getById(dto.getMineralId()));
+        load.setTypeMineral(typeMineralService.getById(dto.getTypeMineralId()));
+
         if (dto.getMineId() != null) {
             load.setMine(mineService.getById(dto.getMineId()));
         } else {

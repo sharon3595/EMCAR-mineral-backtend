@@ -19,8 +19,8 @@ public class LoadPojo {
     private LocalDateTime updatedAt;
     private Integer supplierId;
     private Integer lotId;
-    private Integer materialId;
-    private Integer typeMaterialId;
+    private Integer mineralId;
+    private Integer typeMineralId;
     private Integer mineId;
     private Integer cooperativeId;
     private LocalDate date;
@@ -32,8 +32,8 @@ public class LoadPojo {
 
     private String supplierName;
     private String lotDescription;
-    private String materialName;
-    private String typeMaterialName;
+    private String mineralName;
+    private String typeMineralName;
     private String mineName;
     private String cooperativeName;
 
@@ -66,16 +66,17 @@ public class LoadPojo {
             this.lotDescription = load.getLot().getDescription();
         }
 
-
-        if (load.getMaterial() != null) {
-            this.materialId = load.getMaterial().getId();
-            this.materialName = load.getMaterial().getName();
+        if (load.getMineral() != null) {
+            this.mineralId = load.getMineral().getId();
+            this.mineralName = load.getMineral().getName();
         }
 
-        if (load.getTypeMaterial() != null) {
-            this.typeMaterialId = load.getTypeMaterial().getId();
-            this.typeMaterialName = load.getTypeMaterial().getName();
+
+        if (load.getTypeMineral() != null) {
+            this.typeMineralId = load.getTypeMineral().getId();
+            this.typeMineralName = load.getTypeMineral().getName();
         }
+
 
         if (load.getMine() != null) {
             this.mineId = load.getMine().getId();

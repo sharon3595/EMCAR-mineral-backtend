@@ -22,7 +22,7 @@ public interface TypeMineralRepository extends GenericRepository<TypeMineral, In
                     OR LOWER(t.symbol) LIKE LOWER(CONCAT('%', :some, '%'))
                 ))
             """)
-    List<TypeMaterial> searchByFilters(
+    List<TypeMineral> searchByFilters(
             @Param("name") String name,
             @Param("symbol") String symbol,
             @Param("some") String some

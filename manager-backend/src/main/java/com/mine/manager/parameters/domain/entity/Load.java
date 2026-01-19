@@ -37,12 +37,12 @@ public class Load extends Base{
     private String correlativeLotCode;
 
     @ManyToOne
-    @JoinColumn(name = "material_id", nullable = false)
-    private Material material;
+    @JoinColumn(name = "mineral_id", nullable = false)
+    private Mineral mineral;
 
     @ManyToOne
-    @JoinColumn(name = "type_material_id", nullable = false)
-    private TypeMaterial typeMaterial;
+    @JoinColumn(name = "type_mineral_id", nullable = false)
+    private TypeMineral typeMineral;
 
     @ManyToOne
     @JoinColumn(name = "mine_id")

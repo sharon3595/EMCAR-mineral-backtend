@@ -22,7 +22,7 @@ public interface MineralRepository extends GenericRepository<Mineral, Integer> {
                     OR LOWER(m.symbol) LIKE LOWER(CONCAT('%', :some, '%'))
                 ))
             """)
-    List<Material> searchByFilters(
+    List<Mineral> searchByFilters(
             @Param("name") String name,
             @Param("symbol") String symbol,
             @Param("some") String some
