@@ -20,6 +20,8 @@ public interface LiquidationService extends CRUDService<Liquidation, Integer> {
 
     void delete(Integer id);
 
+    byte[] generateLiquidationPdf(Integer idLiquidation);
+
     List<LiquidationPojo> getFiltered(LiquidationFilter filter);
 
     PagePojo<LiquidationPojo> getByPageAndFilters(int page, int size, String sortBy,

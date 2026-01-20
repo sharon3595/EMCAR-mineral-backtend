@@ -20,6 +20,7 @@ import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
 import com.mine.manager.util.FieldsFilterUtil;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import net.sf.jasperreports.engine.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,10 +28,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
+
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -47,6 +53,7 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
     private final LoadService loadService;
     private final LoadRepository loadRepository;
     private final AdvanceService advanceService;
+    private final DataSource dataSource;
 
 
     private static final String LIQUIDATION = SpanishEntityNameProvider.getSpanishName(Liquidation.class.getSimpleName());
@@ -113,8 +120,8 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
         BigDecimal miningRoyaltiesAmount =
                 calculateDiscount(totalPrice, liquidation.getMiningRoyalties());
 
-        BigDecimal firstAdvance =advanceService.getTotalAdvancesByLoad(liquidation.getLoad().getId()).getTotalAmount();
-                liquidation.setFirstAdvance(firstAdvance);
+        BigDecimal firstAdvance = advanceService.getTotalAdvancesByLoad(liquidation.getLoad().getId()).getTotalAmount();
+        liquidation.setFirstAdvance(firstAdvance);
 
         BigDecimal totalDiscounts = cajaNacionalAmount
                 .add(fedecominAmount)
@@ -222,6 +229,38 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
         return liquidationMapper.fromPageToPagePojo(filtered);
     }
 
+    @Override
+    public byte[] generateLiquidationPdf(Integer idLiquidation) {
+
+        this.getById(idLiquidation);
+
+        try {
+            InputStream reportStream =
+                    getClass().getResourceAsStream("/reports/emcar_report.jrxml");
+
+            JasperReport jasperReport =
+                    JasperCompileManager.compileReport(reportStream);
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("idLiquidation", idLiquidation);
+
+            InputStream logoStream =
+                    getClass().getResourceAsStream("/reports/logo.png");
+            params.put("logo", logoStream);
+
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(
+                            jasperReport,
+                            params,
+                            dataSource.getConnection()
+                    );
+
+            return JasperExportManager.exportReportToPdf(jasperPrint);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error generando PDF de liquidación", e);
+        }
+    }
 
     @Override
     public List<LiquidationPojo> getFiltered(LiquidationFilter filter) {
