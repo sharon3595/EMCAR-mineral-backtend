@@ -1,6 +1,6 @@
 package com.mine.manager.parameters.data.repository;
 
-import com.mine.manager.parameters.domain.entity.Material;
+import com.mine.manager.parameters.domain.entity.Mineral;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -8,23 +8,23 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MaterialRepository extends GenericRepository<Material, Integer> {
-    Boolean existsByName(String name);
-    Boolean existsByNameAndIdNot(String name, Integer id);
+public interface MineralRepository extends GenericRepository<Mineral, Integer> {
+    Boolean existsBySymbol(String symbol);
+    Boolean existsBySymbolAndIdNot(String symbol, Integer id);
 
     @Query("""
-                SELECT m FROM Material m
+                SELECT m FROM Mineral m
                 WHERE m.active = true
                 AND (:name IS NULL OR LOWER(m.name) LIKE LOWER(CONCAT('%', :name, '%')))
-                AND (:description IS NULL OR LOWER(m.description) LIKE LOWER(CONCAT('%', :description, '%')))
+                AND (:symbol IS NULL OR LOWER(m.symbol) LIKE LOWER(CONCAT('%', :symbol, '%')))
                 AND (:some IS NULL OR (
                     LOWER(m.name) LIKE LOWER(CONCAT('%', :some, '%'))
-                    OR LOWER(m.description) LIKE LOWER(CONCAT('%', :some, '%'))
+                    OR LOWER(m.symbol) LIKE LOWER(CONCAT('%', :some, '%'))
                 ))
             """)
-    List<Material> searchByFilters(
+    List<Mineral> searchByFilters(
             @Param("name") String name,
-            @Param("description") String description,
+            @Param("symbol") String symbol,
             @Param("some") String some
     );
 }

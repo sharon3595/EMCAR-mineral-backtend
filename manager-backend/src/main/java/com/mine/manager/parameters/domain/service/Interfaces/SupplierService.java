@@ -20,4 +20,6 @@ public interface SupplierService extends CRUDService<Supplier, Integer>{
     List<Supplier> getFiltered(SupplierFilter filter);
 
     List<SupplierBasicInfoPojo> getFilteredForSelect(String some);
+
+    void delete(Integer id);
 }

@@ -20,13 +20,13 @@ public class LoadDto {
     @Schema(description = "ID del lote al que pertenece", example = "20")
     private Integer lotId;
 
-    @NotNull(message = "{load.materialId.not-null}")
-    @Schema(description = "ID del mineral o material", example = "3")
-    private Integer materialId;
+    @NotNull(message = "{load.mineralId.not-null}")
+    @Schema(description = "ID del mineral", example = "3")
+    private Integer mineralId;
 
-    @NotNull(message = "{load.typeMaterialId.not-null}")
-    @Schema(description = "ID del tipo de material", example = "2")
-    private Integer typeMaterialId;
+    @NotNull(message = "{load.typeMinerallId.not-null}")
+    @Schema(description = "ID del tipo de mineral", example = "2")
+    private Integer typeMineralId;
 
     @Schema(description = "ID de la mina (Opcional)", example = "1")
     private Integer mineId;

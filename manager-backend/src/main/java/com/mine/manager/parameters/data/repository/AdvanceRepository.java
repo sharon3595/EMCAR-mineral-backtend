@@ -25,4 +25,6 @@ public interface AdvanceRepository extends GenericRepository<Advance, Integer> {
         AND a.active = true
     """)
     BigDecimal sumAmountByLoadId(@Param("loadId") Integer loadId);
+
+    boolean existsByLoadIdAndActiveTrue(Integer loadId);
 }

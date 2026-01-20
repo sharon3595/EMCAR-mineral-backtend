@@ -11,7 +11,8 @@ Los siguientes integrantes son:
 # Documentación
 La documentación técnica de los endpoints (API) se encuentra disponible vía Swagger una vez iniciada la aplicación:
 
-* **Swagger UI:** [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+* **Swagger local UI:** [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+* **Swagger prod UI:** [https://emcar-mineral-backtend.onrender.com/swagger-ui/index.html](https://emcar-mineral-backtend.onrender.com/swagger-ui/index.html)
 * **JSON Docs:** [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
 ## Prerrequisitos

@@ -19,6 +19,9 @@ public class Base64Validator implements ConstraintValidator<IsBase64, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         boolean state;
+        if (value == null || value.isEmpty()) {
+            return true;
+        }
         try {
             byte[] imageBytes = Base64.getDecoder().decode(value);
             BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytes));

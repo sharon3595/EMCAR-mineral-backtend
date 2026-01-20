@@ -7,16 +7,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "type_materials", schema = "mine")
-public class TypeMaterial extends Base {
+@Table(name = "type_minerals", schema = "mine")
+public class TypeMineral extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 250, nullable = false)
+    @Column(length = 250)
     private String name;
 
-    @Column(length = 500)
-    private String description;
+    @Column(length = 250, nullable = false)
+    private String symbol;
 }

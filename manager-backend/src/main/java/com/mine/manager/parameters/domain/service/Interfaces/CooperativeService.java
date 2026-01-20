@@ -7,4 +7,6 @@ public interface CooperativeService extends CRUDService<Cooperative, Integer> {
     Cooperative create(CooperativeDto dto);
 
     Cooperative update(Integer id, CooperativeDto dto);
+
+    void delete(Integer id);
 }

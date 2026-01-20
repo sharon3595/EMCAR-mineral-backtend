@@ -2,8 +2,10 @@ package com.mine.manager.parameters.domain.service.Implements;
 
 import com.mine.manager.common.SpanishEntityNameProvider;
 import com.mine.manager.exception.DuplicateException;
+import com.mine.manager.exception.HasAsociatedEntityException;
 import com.mine.manager.parameters.data.repository.CooperativeRepository;
 import com.mine.manager.parameters.data.repository.GenericRepository;
+import com.mine.manager.parameters.data.repository.LoadRepository;
 import com.mine.manager.parameters.domain.entity.Cooperative;
 import com.mine.manager.parameters.domain.service.Interfaces.CooperativeService;
 import com.mine.manager.parameters.presentation.request.dto.CooperativeDto;
@@ -20,6 +22,7 @@ public class CooperativeServiceImpl extends CRUDServiceImpl<Cooperative, Integer
     private final CooperativeRepository cooperativeRepository;
     @Qualifier("defaultMapper")
     private final ModelMapper mapper;
+    private final LoadRepository loadRepository;
     private static final String COOPERATIVE = SpanishEntityNameProvider.getSpanishName(Cooperative.class.getSimpleName());
 
 
@@ -56,6 +59,17 @@ public class CooperativeServiceImpl extends CRUDServiceImpl<Cooperative, Integer
 
     private Cooperative convertToEntity(CooperativeDto dto) {
         return mapper.map(dto, Cooperative.class);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        Cooperative toDelete = this.getById(id);
+        if (loadRepository.existsByCooperativeId(id)) {
+            throw new HasAsociatedEntityException(
+                    COOPERATIVE, "Cargas"
+            );
+        }
+        cooperativeRepository.delete(toDelete);
     }
 }
 

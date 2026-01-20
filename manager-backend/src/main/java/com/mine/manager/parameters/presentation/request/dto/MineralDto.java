@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class MaterialDto {
+public class MineralDto {
 
-    @NotBlank(message = "{materialDto.name.not-blank}")
-    @Size(max = 250, message = "{materialDto.name.size}")
+
+    @Size(max = 250, message = "{mineralDto.name.size}")
     private String name;
 
-    @Size(max = 500, message = "{materialDto.description.size}")
-    private String description;
+    @NotBlank(message = "{mineralDto.symbol.not-blank}")
+    @Size(max = 250, message = "{mineralDto.symbol.size}")
+    private String symbol;
 }

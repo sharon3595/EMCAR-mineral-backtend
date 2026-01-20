@@ -23,25 +23,13 @@ import java.util.List;
 @ControllerAdvice
 public class ErrorHandler {
 
-    /*
-     * Error for Method not supported (Code: 405)
-     * */
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<ErrorResponse> handleMethodNotSupportedException(HttpServletRequest req, Exception ex){
-        HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;
-        ErrorResponse response = new ErrorResponse(status.value(), status.name(), ex.getMessage(), req.getRequestURI() );
-        return ResponseEntity.status(status).body(response);
-    }
 
-    /*
-     * Error for message not readable  (Code: 400)
-     * */
-    /*@ExceptionHandler(HttpMessageNotReadableException.class)
-    public  ResponseEntity<ErrorResponse> handlerMessageNotReadableException(HttpServletRequest req, Exception ex) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ErrorResponse> handleMethodNotSupportedException(HttpServletRequest req, Exception ex) {
+        HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;
         ErrorResponse response = new ErrorResponse(status.value(), status.name(), ex.getMessage(), req.getRequestURI());
         return ResponseEntity.status(status).body(response);
-    }*/
+    }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handlerMessageNotReadableException(HttpServletRequest req, HttpMessageNotReadableException ex) {
@@ -63,22 +51,22 @@ public class ErrorHandler {
      *
      * */
     @ExceptionHandler(EntityNotFoundException.class)
-    public  ResponseEntity<ErrorResponse> handlerEntityNotFoundException(HttpServletRequest req, Exception ex){
+    public ResponseEntity<ErrorResponse> handlerEntityNotFoundException(HttpServletRequest req, Exception ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         ErrorResponse response = new ErrorResponse(status.value(), status.name(), ex.getMessage(), req.getRequestURI());
         return ResponseEntity.status(status).body(response);
     }
 
     @ExceptionHandler(DuplicateException.class)
-    public  ResponseEntity<ErrorResponse> handlerDuplicateException(HttpServletRequest req, Exception ex){
+    public ResponseEntity<ErrorResponse> handlerDuplicateException(HttpServletRequest req, Exception ex) {
         HttpStatus status = HttpStatus.CONFLICT;
         ErrorResponse response = new ErrorResponse(status.value(), status.name(), ex.getMessage(), req.getRequestURI());
         return ResponseEntity.status(status).body(response);
     }
 
     @ExceptionHandler(AlreadyDeletedException.class)
-    public  ResponseEntity<ErrorResponse> handlerAlreadyDeletedException(HttpServletRequest req, Exception ex){
-        HttpStatus status = HttpStatus.BAD_REQUEST ;
+    public ResponseEntity<ErrorResponse> handlerAlreadyDeletedException(HttpServletRequest req, Exception ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         ErrorResponse response = new ErrorResponse(status.value(), status.name(), ex.getMessage(), req.getRequestURI());
         return ResponseEntity.status(status).body(response);
     }
@@ -98,7 +86,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(PropertyNotFoundException.class)
-    public  ResponseEntity<ErrorResponse> handlerPropertyNotFoundException(HttpServletRequest req, Exception ex){
+    public ResponseEntity<ErrorResponse> handlerPropertyNotFoundException(HttpServletRequest req, Exception ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         ErrorResponse response = new ErrorResponse(status.value(), status.name(), ex.getMessage(), req.getRequestURI());
         return ResponseEntity.status(status).body(response);
@@ -152,4 +140,12 @@ public class ErrorHandler {
 
         return ResponseEntity.status(status).body(response);
     }
+
+    @ExceptionHandler(HasAsociatedEntityException.class)
+    public ResponseEntity<ErrorResponse> handlerHasAsociatedEntity(HttpServletRequest req, Exception ex) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorResponse response = new ErrorResponse(status.value(), status.name(), ex.getMessage(), req.getRequestURI());
+        return ResponseEntity.status(status).body(response);
+    }
+
 }

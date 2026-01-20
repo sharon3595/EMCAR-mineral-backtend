@@ -3,7 +3,9 @@ package com.mine.manager.parameters.domain.service.Implements;
 import com.mine.manager.common.SpecificationUtils;
 import com.mine.manager.common.enums.sortByPageable.SupplierPojoEnum;
 import com.mine.manager.exception.DuplicateException;
+import com.mine.manager.exception.HasAsociatedEntityException;
 import com.mine.manager.parameters.data.repository.GenericRepository;
+import com.mine.manager.parameters.data.repository.LoadRepository;
 import com.mine.manager.parameters.data.repository.SupplierRepository;
 import com.mine.manager.parameters.domain.entity.Supplier;
 import com.mine.manager.parameters.domain.mapper.SupplierMapper;
@@ -38,6 +40,7 @@ public class SupplierServiceImpl extends CRUDServiceImpl<Supplier, Integer> impl
     private final ModelMapper mapper;
     private final SupplierMapper supplierMapper;
     private static final String SUPPLIER = "Cliente";
+    private final LoadRepository loadRepository;
 
 
     @Override
@@ -122,7 +125,12 @@ public class SupplierServiceImpl extends CRUDServiceImpl<Supplier, Integer> impl
     @Override
     public void delete(Integer id) {
         Supplier toDelete = this.getById(id);
-        this.supplierRepository.delete(toDelete);
+        if (loadRepository.existsBySupplierId(id)) {
+            throw new HasAsociatedEntityException(
+                    SUPPLIER, "Cargas"
+            );
+        }
+        supplierRepository.delete(toDelete);
     }
 }
 

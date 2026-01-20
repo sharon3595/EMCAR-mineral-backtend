@@ -10,4 +10,6 @@ public interface MineService extends CRUDService<Mine, Integer> {
     Mine update(Integer id, MineDto dto);
 
     List<Mine> getFilteredForSelect(String name, String description, String some);
+
+    void delete(Integer id);
 }

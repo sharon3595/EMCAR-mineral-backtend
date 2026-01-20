@@ -27,4 +27,14 @@ public interface LoadRepository extends GenericRepository<Load, Integer> {
         )
     """)
     List<Integer> findIdsBySome(@Param("some") String some);
+
+    boolean existsBySupplierId(Integer supplierId);
+
+    boolean existsByMineralId(Integer mineralId);
+
+    boolean existsByTypeMineralId(Integer typeMineralId);
+
+    boolean existsByMineId(Integer mineId);
+
+    boolean existsByCooperativeId(Integer cooperativeId);
 }
