@@ -20,6 +20,7 @@ public class LiquidationPojo {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private String liquidationType;
+    private Integer loadId;
     private Integer supplierId;
     private Integer lotId;
     private Integer mineralId;
@@ -90,14 +91,14 @@ public class LiquidationPojo {
 
         if (liquidation.getLoad() != null) {
             var load = liquidation.getLoad();
-
+            this.loadId = load.getId();
             this.externalLot = load.getExternalLot();
             this.correlativeLotCode = load.getCorrelativeLotCode();
 
             if (load.getSupplier() != null) {
                 this.supplierId = load.getSupplier().getId();
                 this.supplierName = StringUtil.concatenate
-                        (load.getSupplier().getName(),load.getSupplier().getSurname()," ");
+                        (load.getSupplier().getName(), load.getSupplier().getSurname(), " ");
             }
 
             if (load.getLot() != null) {

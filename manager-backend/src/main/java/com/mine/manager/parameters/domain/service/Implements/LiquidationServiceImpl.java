@@ -260,10 +260,9 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
         // Fórmula: [(Peso Kilo / 1000) * (Ley * 100) / 31.1035 * Cot * TC * 3.6%]
         // -----------------------------------------------------
 
-        // Paso A: Convertir input Kilos a Toneladas para la fórmula
         BigDecimal weightInTonnes = weightInKilos.divide(new BigDecimal("1000"), 5, RoundingMode.HALF_UP);
 
-        // Paso B: Gramos de plata (Toneladas * (Ley * 100))
+        // Paso B: Gramos de plata
         BigDecimal gramsSilver = weightInTonnes.multiply(request.getLawSilver().multiply(new BigDecimal("100")));
 
         // Paso C: Onzas Troy
