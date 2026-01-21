@@ -1,14 +1,19 @@
 package com.mine.manager.parameters.domain.service.Implements;
 
 import com.mine.manager.common.SpanishEntityNameProvider;
+import com.mine.manager.common.enums.LotTypeEnum;
 import com.mine.manager.exception.EntityNotFoundException;
+import com.mine.manager.exception.InvalidValueException;
 import com.mine.manager.parameters.data.repository.AdvanceRepository;
 import com.mine.manager.parameters.data.repository.GenericRepository;
 import com.mine.manager.parameters.domain.entity.Advance;
+import com.mine.manager.parameters.domain.entity.Lot;
 import com.mine.manager.parameters.domain.service.Interfaces.AdvanceService;
 import com.mine.manager.parameters.domain.service.Interfaces.LoadService;
+import com.mine.manager.parameters.domain.service.Interfaces.LotService;
 import com.mine.manager.parameters.presentation.request.dto.AdvanceDto;
 import com.mine.manager.parameters.presentation.response.pojo.AdvancePojo;
+import com.mine.manager.parameters.presentation.response.pojo.CorrelativePojo;
 import com.mine.manager.parameters.presentation.response.pojo.TotalAdvancesByLoadPojo;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -25,6 +30,7 @@ public class AdvanceServiceImpl extends CRUDServiceImpl<Advance, Integer> implem
 
     private final AdvanceRepository advanceRepository;
     private final LoadService loadService;
+    private final LotService lotService;
     @Qualifier("defaultMapper")
     private final ModelMapper mapper;
     private static final String ADVANCE = SpanishEntityNameProvider.getSpanishName(Advance.class.getSimpleName());
@@ -39,6 +45,13 @@ public class AdvanceServiceImpl extends CRUDServiceImpl<Advance, Integer> implem
         Advance advance = convertToEntity(dto);
         advance.setId(null);
         advance.setLoad(loadService.getById(dto.getLoadId()));
+        Lot lot = lotService.getLotById(dto.getLotId());
+        if (!lot.getAssignment().equals(LotTypeEnum.RECEIPT)) {
+            throw new InvalidValueException("No se puede generar el correlativo: el lote indicado no es de tipo Recibo.");
+        }
+        advance.setLot(lot);
+        CorrelativePojo correlative = loadService.processCorrelative(dto.getLotId(), true);
+        advance.setReceiptCode(correlative.getCorrelative());
         advanceRepository.save(advance);
         return new AdvancePojo(advance);
     }
@@ -56,6 +69,8 @@ public class AdvanceServiceImpl extends CRUDServiceImpl<Advance, Integer> implem
         Advance advance = convertToEntity(dto);
         advance.setId(advanceFound.getId());
         advance.setLoad(advanceFound.getLoad());
+        advance.setLot(advanceFound.getLot());
+        advance.setReceiptCode(advanceFound.getReceiptCode());
         return advance;
     }
 

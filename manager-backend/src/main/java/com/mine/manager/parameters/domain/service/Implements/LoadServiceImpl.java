@@ -2,9 +2,11 @@ package com.mine.manager.parameters.domain.service.Implements;
 
 import com.mine.manager.common.SpanishEntityNameProvider;
 import com.mine.manager.common.SpecificationUtils;
+import com.mine.manager.common.enums.LotTypeEnum;
 import com.mine.manager.common.enums.StateLoadEnum;
 import com.mine.manager.exception.EntityNotFoundException;
 import com.mine.manager.exception.HasAsociatedEntityException;
+import com.mine.manager.exception.InvalidValueException;
 import com.mine.manager.parameters.data.repository.AdvanceRepository;
 import com.mine.manager.parameters.data.repository.GenericRepository;
 import com.mine.manager.parameters.data.repository.LiquidationRepository;
@@ -81,9 +83,12 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
     private void updateEntities(LoadDto dto, Load load, boolean isUpdate) {
         load.setSupplier(supplierService.getById(dto.getSupplierId()));
         if (!isUpdate) {
+            Lot lot = lotService.getLotById(dto.getLotId());
+            if (!lot.getAssignment().equals(LotTypeEnum.RECEPTION)){
+                throw new InvalidValueException("No se puede generar el correlativo: el lote indicado no es de tipo Recepción.");
+            }
             load.setLot(lotService.getLotById(dto.getLotId()));
         }
-        ;
         load.setMineral(mineralService.getById(dto.getMineralId()));
         load.setTypeMineral(typeMineralService.getById(dto.getTypeMineralId()));
 

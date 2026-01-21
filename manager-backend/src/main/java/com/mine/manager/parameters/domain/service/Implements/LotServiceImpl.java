@@ -2,6 +2,7 @@ package com.mine.manager.parameters.domain.service.Implements;
 
 import com.mine.manager.common.SpanishEntityNameProvider;
 import com.mine.manager.common.SpecificationUtils;
+import com.mine.manager.common.enums.LotTypeEnum;
 import com.mine.manager.exception.DuplicateException;
 import com.mine.manager.exception.EntityNotFoundException;
 import com.mine.manager.exception.HasAsociatedEntityException;
@@ -58,7 +59,7 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
     @Override
     public Lot update(Integer id, LotDto dto) {
         Lot lotFound = this.getById(id);
-        if (lotRepository.existsByPrefixAndInitialDocNumberAndIdNotAndActiveTrue(dto.getPrefix(), dto.getInitialDocNumber(),id)) {
+        if (lotRepository.existsByPrefixAndInitialDocNumberAndIdNotAndActiveTrue(dto.getPrefix(), dto.getInitialDocNumber(), id)) {
             throw new DuplicateException(LOT, "prefijo y numero inicial", StringUtil.concatenate(dto.getPrefix(),
                     dto.getInitialDocNumber().toString(), " "));
         }
@@ -70,9 +71,11 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
         Lot lot = convertToEntity(dto);
         lot.setId(lotFound.getId());
         lot.setCurrentDocNumber(lotFound.getCurrentDocNumber());
-        if (dto.getInitialDocNumber()!=null && lotFound.getCurrentDocNumber()==null)
-        {lot.setInitialDocNumber(dto.getInitialDocNumber());}
-        else{lot.setInitialDocNumber(lotFound.getInitialDocNumber());}
+        if (dto.getInitialDocNumber() != null && lotFound.getCurrentDocNumber() == null) {
+            lot.setInitialDocNumber(dto.getInitialDocNumber());
+        } else {
+            lot.setInitialDocNumber(lotFound.getInitialDocNumber());
+        }
         return lot;
     }
 
@@ -85,15 +88,16 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
     @Override
     public Lot getLotById(Integer id) {
         return lotRepository.findByIdAndActiveTrue(id).
-                orElseThrow(()-> new EntityNotFoundException(LOT, id));
+                orElseThrow(() -> new EntityNotFoundException(LOT, id));
     }
 
 
     @Override
     public void delete(Integer id) {
         Lot lot = this.getLotById(id);
-        if (lot.getCurrentDocNumber()!= null) {
-            throw new HasAsociatedEntityException(LOT, "Cargas");
+        if (lot.getCurrentDocNumber() != null) {
+            throw new HasAsociatedEntityException(LOT, lot.getAssignment().equals(LotTypeEnum.RECEIPT) ?
+                    "Anticipos" : "Cargas");
         }
         lot.setActive(false);
         lotRepository.save(lot);
@@ -106,7 +110,7 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
 
     @Override
     public PagePojo<Lot> getByPageAndFilters(int page, int size, String sortBy,
-                                                  String sortOrder, LotFilter filter) {
+                                             String sortOrder, LotFilter filter) {
         Sort sort = Sort.by(Sort.Direction.fromString(sortOrder), sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
         Specification<Lot> spec = this.generateSpecification(filter);
@@ -114,7 +118,7 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
         return this.fromPageToPagePojo(filtered);
     }
 
-    public PagePojo<Lot> fromPageToPagePojo(Page<Lot> page){
+    public PagePojo<Lot> fromPageToPagePojo(Page<Lot> page) {
         PagePojo<Lot> dto = new PagePojo<>();
         dto.setContent(page.getContent());
         dto.setLast(page.isLast());
@@ -134,12 +138,12 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
     private Specification<Lot> generateSpecification(LotFilter filter) {
         FieldsFilterUtil fields = new FieldsFilterUtil();
         fields.addEqualsField("active", true);
-        fields.addEqualsField("prefix",filter.getPrefix());
+        fields.addEqualsField("prefix", filter.getPrefix());
         fields.addLikeField("description", filter.getDescription());
         fields.addEqualsField("initialDocNumber", filter.getInitialDocNumber());
         fields.addEqualsField("currentDocNumber", filter.getCurrentDocNumber());
         fields.addLikeField("assignment", filter.getAssignment());
-        fields.addEqualsField("state",filter.getState());
+        fields.addEqualsField("state", filter.getState());
         return SpecificationUtils.createSpecification(fields.getFilterFields());
     }
 }

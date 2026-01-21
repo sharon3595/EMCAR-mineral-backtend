@@ -23,13 +23,19 @@ public class AdvanceDto {
     @Schema(description = "ID de la Carga (Obligatorio al crear)", example = "105")
     private Integer loadId;
 
-    @NotNull(message = "{advance.receiptType.not-null}")
-    @Schema(description = "Tipo de recibo", example = "MANUAL")
-    private ReceiptTypeEnum receiptType;
+    @NotNull(message = "{load.lotId.not-null}")
+    @Schema(description = "ID del lote al que pertenece", example = "20")
+    private Integer lotId;
+
     @NotBlank(message = "{advance.receiptCode.not-blank}")
     @Size(max = 50, message = "{advance.receiptCode.size}")
     @Schema(description = "Número o código del recibo físico", example = "REC-00123")
     private String receiptCode;
+
+    @NotNull(message = "{advance.receiptType.not-null}")
+    @Schema(description = "Tipo de recibo", example = "MANUAL")
+    private ReceiptTypeEnum receiptType;
+
 
     @NotNull(message = "{advance.date.not-null}")
     @PastOrPresent(message = "{advance.date.past-or-present}") // No puedes anticipar fechas futuras

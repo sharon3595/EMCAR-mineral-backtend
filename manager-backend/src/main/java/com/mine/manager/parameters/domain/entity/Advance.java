@@ -22,6 +22,9 @@ public class Advance extends Base{
     private Integer id;
     @Column(length = 30, nullable = false)
     private ReceiptTypeEnum receiptType;
+    @ManyToOne
+    @JoinColumn(name = "lot_id", nullable = false)
+    private Lot lot;
     @Column(length = 50, nullable = false)
     private String receiptCode;
     @Column(nullable = false)
