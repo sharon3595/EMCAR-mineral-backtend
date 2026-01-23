@@ -52,7 +52,7 @@ public class Load extends Base{
     @JoinColumn(name = "cooperative_id")
     private Cooperative cooperative;
 
-    @Column(nullable = false, precision = 15, scale = 2)
+    @Column(precision = 15, scale = 2)
     private BigDecimal numberSacks;
 
     @Column(nullable = false, precision = 15, scale = 3)
