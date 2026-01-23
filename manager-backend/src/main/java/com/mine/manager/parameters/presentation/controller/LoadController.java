@@ -101,6 +101,7 @@ public class LoadController {
             @RequestParam(required = false) LocalDate startDate,
             @RequestParam(required = false) LocalDate endDate,
             @RequestParam(required = false) String lotDescription,
+            @RequestParam(required = false) String state,
             @RequestParam(required = false) String some
     ) {
 
@@ -110,6 +111,7 @@ public class LoadController {
                 startDate,
                 endDate,
                 lotDescription,
+                state,
                 some
         );
         List<LoadPojo> listFiltered = loadService.getFiltered(filter);
@@ -129,6 +131,7 @@ public class LoadController {
             @RequestParam(required = false) LocalDate startDate,
             @RequestParam(required = false) LocalDate endDate,
             @RequestParam(required = false) String lotDescription,
+            @RequestParam(required = false) String state,
             @RequestParam(required = false) String some
     ) {
 
@@ -138,6 +141,7 @@ public class LoadController {
                 startDate,
                 endDate,
                 lotDescription,
+                state,
                 some
         );
 

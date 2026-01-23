@@ -183,6 +183,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
         fields.addEqualsField("active", true);
         fields.addLikeField("correlativeLotCode", filter.getCorrelativeLotCode());
         fields.addLikeField("supplier.name", filter.getSupplierName());
+        fields.addLikeField("state", filter.getState());
         fields.addLikeField("lot.description", filter.getLotDescription());
         fields.addDateField("date", filter.getStartDate()
                 , filter.getEndDate() != null ? filter.getEndDate() : LocalDate.now());

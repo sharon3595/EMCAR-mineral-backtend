@@ -16,6 +16,7 @@ public class LoadFilter {
     private LocalDate startDate;
     private LocalDate endDate;
     private String lotDescription;
+    private String state;
     private String some;
 
 }
