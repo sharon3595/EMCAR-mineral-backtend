@@ -43,14 +43,10 @@ public class AdvanceServiceImpl extends CRUDServiceImpl<Advance, Integer> implem
     @Override
     public AdvancePojo create(AdvanceDto dto) {
         Advance advance = convertToEntity(dto);
-        advance.setId(null);
         advance.setLoad(loadService.getById(dto.getLoadId()));
-        Lot lot = lotService.getLotById(dto.getLotId());
-        if (!lot.getAssignment().equals(LotTypeEnum.RECEIPT)) {
-            throw new InvalidValueException("No se puede generar el correlativo: el lote indicado no es de tipo Recibo.");
-        }
+        Lot lot = lotService.receiptLot();
         advance.setLot(lot);
-        CorrelativePojo correlative = loadService.processCorrelative(dto.getLotId(), true);
+        CorrelativePojo correlative = loadService.processCorrelative(lot.getId(), true);
         advance.setReceiptCode(correlative.getCorrelative());
         advanceRepository.save(advance);
         return new AdvancePojo(advance);

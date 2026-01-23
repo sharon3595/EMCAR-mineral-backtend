@@ -47,12 +47,12 @@ public class CooperativeDto {
     @DecimalMax(value = "100.00", message = "{cooperativeDto.percentage.range}")
     @Digits(integer = 3, fraction = 2, message = "{cooperativeDto.percentage.digits}")
     private BigDecimal miningRoyalties = BigDecimal.ZERO;
-    private Boolean printCajaNacional = false;
-    private Boolean printFedecomin = false;
-    private Boolean printFencomin = false;
-    private Boolean printComibol = false;
-    private Boolean printWilstermann = false;
-    private Boolean printCooperativeContribution = false;
-    private Boolean printMiningRoyalties = false;
+    private Boolean printCajaNacional = true;
+    private Boolean printFedecomin = true;
+    private Boolean printFencomin = true;
+    private Boolean printComibol = true;
+    private Boolean printWilstermann = true;
+    private Boolean printCooperativeContribution = true;
+    private Boolean printMiningRoyalties = true;
 }
 

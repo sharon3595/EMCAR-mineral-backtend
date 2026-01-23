@@ -1,6 +1,7 @@
 package com.mine.manager.parameters.domain.service.Implements;
 
 import com.mine.manager.common.SpanishEntityNameProvider;
+import com.mine.manager.exception.DuplicateException;
 import com.mine.manager.exception.EntityNotFoundException;
 import com.mine.manager.parameters.data.repository.CompanyRepository;
 import com.mine.manager.parameters.data.repository.GenericRepository;
@@ -28,6 +29,10 @@ public class CompanyServiceImpl extends CRUDServiceImpl<Company, Integer> implem
 
     @Override
     public Company create(CompanyDto dto) {
+        if (companyRepository.count() > 0) {
+            throw new DuplicateException("Ya existe una compañía registrada en el sistema. No se permite crear más de una.");
+        }
+
         return companyRepository.save(companyMapper.fromDto(dto));
     }
 

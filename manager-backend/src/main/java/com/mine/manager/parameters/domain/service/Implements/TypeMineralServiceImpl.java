@@ -52,13 +52,12 @@ public class TypeMineralServiceImpl extends CRUDServiceImpl<TypeMineral, Integer
 
 
     @Override
-    public List<TypeMineral> getFilteredForSelect(String name, String description, String some) {
-        String cleanName = (name != null && !name.isBlank()) ? name : null;
-        String cleanDesc = (description != null && !description.isBlank()) ? description : null;
-        String cleanSome = (some != null && !some.isBlank()) ? some : null;
+    public List<TypeMineral> getFilteredForSelect(String name, String symbol, String some) {
+        String namePattern = (name != null && !name.isBlank()) ? "%" + name + "%" : null;
+        String symbolPattern = (symbol != null && !symbol.isBlank()) ? "%" + symbol + "%" : null;
+        String somePattern = (some != null && !some.isBlank()) ? "%" + some + "%" : null;
 
-
-        return typeMineralRepository.searchByFilters(cleanName, cleanDesc, cleanSome);
+        return typeMineralRepository.searchByFilters(namePattern, symbolPattern, somePattern);
     }
 
     @Override

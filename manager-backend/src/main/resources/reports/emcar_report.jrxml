@@ -58,7 +58,7 @@
 		</box>
 	</style>
 	<parameter name="idLiquidation" class="java.lang.String"/>
-	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[SELECT
     /* =======================
@@ -167,7 +167,14 @@
     mi.name                   AS mine_name,
 
     co.id                     AS cooperative_id,
-    co.name                   AS cooperative_name
+    co.name                   AS cooperative_name,
+    
+    co.print_caja_nacional, 
+    co.print_comibol, 
+    co.print_cooperative_contribution, 
+    co.print_fedecomin, 
+    co.print_fencomin, 
+    co.print_mining_royalties 
 
 FROM mine.liquidations lq
 JOIN mine.loads ld           ON ld.id = lq.load_id
@@ -488,11 +495,41 @@ WHERE lq.active = true
 		<property name="com.jaspersoft.studio.field.label" value="cooperative_name"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="cooperatives"/>
 	</field>
+	<field name="print_caja_nacional" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="print_caja_nacional"/>
+		<property name="com.jaspersoft.studio.field.label" value="print_caja_nacional"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cooperatives"/>
+	</field>
+	<field name="print_comibol" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="print_comibol"/>
+		<property name="com.jaspersoft.studio.field.label" value="print_comibol"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cooperatives"/>
+	</field>
+	<field name="print_cooperative_contribution" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="print_cooperative_contribution"/>
+		<property name="com.jaspersoft.studio.field.label" value="print_cooperative_contribution"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cooperatives"/>
+	</field>
+	<field name="print_fedecomin" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="print_fedecomin"/>
+		<property name="com.jaspersoft.studio.field.label" value="print_fedecomin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cooperatives"/>
+	</field>
+	<field name="print_fencomin" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="print_fencomin"/>
+		<property name="com.jaspersoft.studio.field.label" value="print_fencomin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cooperatives"/>
+	</field>
+	<field name="print_mining_royalties" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="print_mining_royalties"/>
+		<property name="com.jaspersoft.studio.field.label" value="print_mining_royalties"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cooperatives"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="75" splitType="Stretch">
+		<band height="83" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<rectangle radius="1">
 				<reportElement positionType="FixRelativeToBottom" x="440" y="0" width="131" height="75" uuid="923524fb-f317-495c-9d9e-8ba3315a86f8"/>
@@ -501,7 +538,7 @@ WHERE lq.active = true
 				</graphicElement>
 			</rectangle>
 			<image>
-				<reportElement x="450" y="14" width="109" height="48" uuid="ab21bb51-30a9-436b-b9fa-4d1f9573a2a4"/>
+				<reportElement x="440" y="1" width="129" height="74" uuid="ab21bb51-30a9-436b-b9fa-4d1f9573a2a4"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<staticText>
@@ -518,7 +555,7 @@ WHERE lq.active = true
 				<text><![CDATA[LIQUIDACIÓN DE MINERALES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="440" height="56" forecolor="#0A0A0A" backcolor="#CEEDE3" uuid="f63e35ea-8e77-4ea7-bce8-38d5a275a4ab"/>
+				<reportElement style="Table 3_TH" mode="Opaque" x="0" y="0" width="440" height="56" forecolor="#0A0A0A" backcolor="#D3E4ED" uuid="f63e35ea-8e77-4ea7-bce8-38d5a275a4ab"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -544,10 +581,10 @@ WHERE lq.active = true
 					<font size="18" isBold="true"/>
 					<paragraph spacingBefore="3"/>
 				</textElement>
-				<text><![CDATA[EMPRESA MINERA EMCAR]]></text>
+				<text><![CDATA[COMERCIALIZADORA CARDENAS COMCAR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="29" width="440" height="28" backcolor="rgba(255, 255, 255, 0.0)" uuid="13a879cf-2889-4466-ad5b-abd10e12e7e1"/>
+				<reportElement x="0" y="28" width="440" height="28" backcolor="rgba(255, 255, 255, 0.0)" uuid="13a879cf-2889-4466-ad5b-abd10e12e7e1"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -793,7 +830,7 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{supplier_name} +" " +$F{supplier_surname}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.###;###0.###" isBlankWhenNull="true">
-				<reportElement x="100" y="71" width="189" height="20" uuid="fa5d67a5-72eb-4718-9a16-3419a567aa39">
+				<reportElement x="99" y="71" width="189" height="20" uuid="fa5d67a5-72eb-4718-9a16-3419a567aa39">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -1369,49 +1406,6 @@ WHERE lq.active = true
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
 			</textField>
-			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
-				<reportElement x="100" y="123" width="100" height="17" uuid="1e61ebca-8ff4-4cf1-a089-a3cb9c15a4fe">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
-				<textFieldExpression><![CDATA[$F{cooperative_contribution}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
-				<reportElement x="100" y="105" width="100" height="18" uuid="5bfbdb31-1aa7-496f-8f0a-e83bdf3b7042">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
-				<textFieldExpression><![CDATA[$F{fencomin}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
-				<reportElement x="100" y="0" width="100" height="17" uuid="611ded28-7379-4ba3-9ed6-5097e39ffd46">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="2.0"/>
-					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
-				<textFieldExpression><![CDATA[$F{caja_nacional}]]></textFieldExpression>
-			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="###0.##" isBlankWhenNull="true">
 				<reportElement x="200" y="158" width="109" height="18" uuid="28648e03-2513-4a8c-af82-87e62935b53c">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1512,20 +1506,6 @@ WHERE lq.active = true
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
 				<textFieldExpression><![CDATA[$F{royalty_lead}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
-				<reportElement x="100" y="17" width="100" height="18" uuid="942fbdba-bda9-4ebc-9c6f-62521e220775">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
-				<textFieldExpression><![CDATA[$F{comibol}]]></textFieldExpression>
-			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.##;#,##0.##" isBlankWhenNull="true">
 				<reportElement x="100" y="34" width="100" height="18" uuid="9f647bc7-b52c-4595-8074-e9bd166ba2d0">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1568,20 +1548,128 @@ WHERE lq.active = true
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
 				<textFieldExpression><![CDATA["3,00 %"]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
-				<reportElement x="100" y="88" width="100" height="18" uuid="8b2c9da3-92a2-4752-8ec4-39407f4af930">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
+			<frame>
+				<reportElement x="100" y="0" width="100" height="17" uuid="ee6ffdaf-d622-49a0-83eb-5032512ca24f"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="100" height="17" uuid="611ded28-7379-4ba3-9ed6-5097e39ffd46">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$F{print_caja_nacional}]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="2.0"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+					<textFieldExpression><![CDATA[$F{caja_nacional}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="100" y="17" width="100" height="17" uuid="d00a0323-6ff9-4f10-ba66-32447da6791f"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
-				<textFieldExpression><![CDATA[$F{fedecomin}]]></textFieldExpression>
-			</textField>
+				<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="100" height="17" uuid="942fbdba-bda9-4ebc-9c6f-62521e220775">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$F{print_comibol}]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+					<textFieldExpression><![CDATA[$F{comibol}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="100" y="88" width="100" height="17" uuid="e4e94502-9d55-4f56-af6e-1e3bb1d4a570"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="100" height="17" uuid="8b2c9da3-92a2-4752-8ec4-39407f4af930">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$F{print_fedecomin}]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+					<textFieldExpression><![CDATA[$F{fedecomin}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="100" y="123" width="100" height="17" uuid="e3febeb4-0e17-47eb-9935-5127b191d282"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<frame>
+					<reportElement x="0" y="-18" width="100" height="18" uuid="b83c5fb4-bfc0-400c-ba85-5acbce1e15d9"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="100" height="18" uuid="5bfbdb31-1aa7-496f-8f0a-e83bdf3b7042">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<printWhenExpression><![CDATA[$F{print_fencomin}]]></printWhenExpression>
+						</reportElement>
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+						<textFieldExpression><![CDATA[$F{fencomin}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="#,##0.00&apos; %&apos;" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="100" height="17" uuid="1e61ebca-8ff4-4cf1-a089-a3cb9c15a4fe">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$F{print_cooperative_contribution}]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none"/>
+					<textFieldExpression><![CDATA[$F{cooperative_contribution}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 		<band height="144">
 			<printWhenExpression><![CDATA[$F{liquidation_type}.equals("PRIVATE")]]></printWhenExpression>

@@ -9,9 +9,11 @@ import com.mine.manager.exception.HasAsociatedEntityException;
 import com.mine.manager.parameters.data.repository.GenericRepository;
 import com.mine.manager.parameters.data.repository.LotRepository;
 import com.mine.manager.parameters.domain.entity.Lot;
+import com.mine.manager.parameters.domain.mapper.LotMapper;
 import com.mine.manager.parameters.domain.service.Interfaces.LotService;
 import com.mine.manager.parameters.presentation.request.dto.LotDto;
 import com.mine.manager.parameters.presentation.request.filter.LotFilter;
+import com.mine.manager.parameters.presentation.response.pojo.LotPojo;
 import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
 import com.mine.manager.util.FieldsFilterUtil;
 import com.mine.manager.util.StringUtil;
@@ -36,6 +38,7 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
     private final LotRepository lotRepository;
     @Qualifier("defaultMapper")
     private final ModelMapper mapper;
+    private final LotMapper lotMapper;
     private static final String LOT = SpanishEntityNameProvider.getSpanishName(Lot.class.getSimpleName());
 
 
@@ -46,25 +49,28 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
 
 
     @Override
-    public Lot create(LotDto dto) {
+    public LotPojo create(LotDto dto) {
         if (lotRepository.existsByPrefixAndInitialDocNumberAndActiveTrue(dto.getPrefix(), dto.getInitialDocNumber())) {
             throw new DuplicateException(LOT, "prefijo y numero inicial", StringUtil.concatenate(dto.getPrefix(),
                     dto.getInitialDocNumber().toString(), " "));
         }
+        if (lotRepository.findFirstByAssignmentAndStateTrueAndActiveTrue(LotTypeEnum.RECEIPT).isPresent()) {
+            throw new DuplicateException("Ya existe un lote activo para la numeración de Recibos.");
+        }
         Lot lot = convertToEntity(dto);
-        return lotRepository.save(lot);
+                return lotMapper.toPojo(lotRepository.save(lot));
     }
 
 
     @Override
-    public Lot update(Integer id, LotDto dto) {
+    public LotPojo update(Integer id, LotDto dto) {
         Lot lotFound = this.getById(id);
         if (lotRepository.existsByPrefixAndInitialDocNumberAndIdNotAndActiveTrue(dto.getPrefix(), dto.getInitialDocNumber(), id)) {
             throw new DuplicateException(LOT, "prefijo y numero inicial", StringUtil.concatenate(dto.getPrefix(),
                     dto.getInitialDocNumber().toString(), " "));
         }
         Lot updatedLot = updateLotEntity(lotFound, dto);
-        return lotRepository.save(updatedLot);
+        return lotMapper.toPojo(lotRepository.save(updatedLot));
     }
 
     private Lot updateLotEntity(Lot lotFound, LotDto dto) {
@@ -80,10 +86,16 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
     }
 
     @Override
-    public List<Lot> getLots() {
-        return lotRepository.findAllByActiveIsTrue();
+    public List<LotPojo> getLots() {
+        return lotMapper.toPojoList(lotRepository.findAllByActiveIsTrue());
     }
 
+
+    @Override
+    public LotPojo getLotPojoById(Integer id) {
+       Lot lot = this.getLotById(id);
+       return lotMapper.toPojo(lot);
+    }
 
     @Override
     public Lot getLotById(Integer id) {
@@ -130,9 +142,16 @@ public class LotServiceImpl extends CRUDServiceImpl<Lot, Integer> implements
     }
 
     @Override
-    public List<Lot> getFiltered(LotFilter filter) {
+    public Lot receiptLot() {
+        return lotRepository.findFirstByAssignmentAndStateTrueAndActiveTrue(LotTypeEnum.RECEIPT)
+                .orElseThrow(() -> new EntityNotFoundException
+                        ("No se encontró un lote activo para la numeración de Recibos."));
+    }
+
+    @Override
+    public List<LotPojo> getFiltered(LotFilter filter) {
         Specification<Lot> spec = this.generateSpecification(filter);
-        return lotRepository.findAll(spec);
+        return lotMapper.toPojoList(lotRepository.findAll(spec));
     }
 
     private Specification<Lot> generateSpecification(LotFilter filter) {

@@ -2,7 +2,6 @@ package com.mine.manager.parameters.presentation.request.dto;
 
 import com.mine.manager.common.enums.PaymentChanelEnum;
 import com.mine.manager.common.enums.PaymentTypeEnum;
-import com.mine.manager.common.enums.ReceiptTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -23,19 +22,10 @@ public class AdvanceDto {
     @Schema(description = "ID de la Carga (Obligatorio al crear)", example = "105")
     private Integer loadId;
 
-    @NotNull(message = "{load.lotId.not-null}")
-    @Schema(description = "ID del lote al que pertenece", example = "20")
-    private Integer lotId;
-
     @NotBlank(message = "{advance.receiptCode.not-blank}")
     @Size(max = 50, message = "{advance.receiptCode.size}")
     @Schema(description = "Número o código del recibo físico", example = "REC-00123")
     private String receiptCode;
-
-    @NotNull(message = "{advance.receiptType.not-null}")
-    @Schema(description = "Tipo de recibo", example = "MANUAL")
-    private ReceiptTypeEnum receiptType;
-
 
     @NotNull(message = "{advance.date.not-null}")
     @PastOrPresent(message = "{advance.date.past-or-present}") // No puedes anticipar fechas futuras
@@ -47,7 +37,6 @@ public class AdvanceDto {
     @Schema(description = "Monto del anticipo", example = "5000.00")
     private BigDecimal amount;
 
-
     @NotBlank(message = "{advance.concept.not-blank}")
     @Size(max = 500, message = "{advance.concept.size}")
     @Schema(description = "Razón o concepto del pago", example = "Pago adelanto por transporte de carga mineral")
@@ -56,7 +45,6 @@ public class AdvanceDto {
     @Size(max = 500, message = "{advance.observation.size}")
     @Schema(description = "Observaciones adicionales (Opcional)", example = "Entregado al chofer suplente")
     private String observation;
-
 
     @NotNull(message = "{advance.paymentType.not-null}")
     private PaymentTypeEnum paymentType;

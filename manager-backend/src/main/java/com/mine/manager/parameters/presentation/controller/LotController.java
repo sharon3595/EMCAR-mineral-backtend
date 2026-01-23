@@ -1,12 +1,10 @@
 package com.mine.manager.parameters.presentation.controller;
 
-import com.mine.manager.common.enums.LotTypeEnum;
 import com.mine.manager.parameters.domain.entity.Lot;
 import com.mine.manager.parameters.domain.service.Interfaces.LotService;
 import com.mine.manager.parameters.presentation.request.dto.LotDto;
-import com.mine.manager.parameters.presentation.request.filter.LoadFilter;
 import com.mine.manager.parameters.presentation.request.filter.LotFilter;
-import com.mine.manager.parameters.presentation.response.pojo.LoadPojo;
+import com.mine.manager.parameters.presentation.response.pojo.LotPojo;
 import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,16 +12,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -40,7 +34,7 @@ public class LotController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Todos los lotes", content = @Content)})
     @GetMapping
-    public ResponseEntity<List<Lot>> getAll() {
+    public ResponseEntity<List<LotPojo>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(lotService.getLots());
     }
 
@@ -52,7 +46,7 @@ public class LotController {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = Lot.class))}),
             @ApiResponse(responseCode = "400", description = "Entrada invalida", content = @Content)})
     @PostMapping
-    public ResponseEntity<Lot> create(@Valid @RequestBody LotDto dto) {
+    public ResponseEntity<LotPojo> create(@Valid @RequestBody LotDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(lotService.create(dto));
     }
 
@@ -61,7 +55,7 @@ public class LotController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lote actualizado")})
     @PutMapping("/{id}")
-    public ResponseEntity<Lot> update(@PathVariable Integer id,
+    public ResponseEntity<LotPojo> update(@PathVariable Integer id,
                                       @Valid @RequestBody LotDto dto) {
         return ResponseEntity.status(HttpStatus.OK).body(lotService.update(id, dto));
     }
@@ -75,8 +69,8 @@ public class LotController {
             @ApiResponse(responseCode = "400", description = "ID incorrecto", content = @Content),
             @ApiResponse(responseCode = "404", description = "Lote no encontrado", content = @Content)})
     @GetMapping("/{id}")
-    public ResponseEntity<Lot> getById(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(lotService.getLotById(id));
+    public ResponseEntity<LotPojo> getById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(lotService.getLotPojoById(id));
     }
 
 
@@ -94,7 +88,7 @@ public class LotController {
 
     @Operation(summary = "Listar cargas aplicando filtros.")
     @GetMapping("/search")
-    public ResponseEntity<List<Lot>> getFiltered(
+    public ResponseEntity<List<LotPojo>> getFiltered(
             @RequestParam(required = false) Integer id,
             @RequestParam(required = false) String prefix,
             @RequestParam(required = false) String description,
@@ -113,7 +107,7 @@ public class LotController {
                 assignment,
                 state
         );
-        List<Lot> listFiltered = lotService.getFiltered(filter);
+        List<LotPojo> listFiltered = lotService.getFiltered(filter);
         return ResponseEntity.status(HttpStatus.OK).body(listFiltered);
     }
 

@@ -1,5 +1,6 @@
 package com.mine.manager.parameters.data.repository;
 
+import com.mine.manager.common.enums.LotTypeEnum;
 import com.mine.manager.parameters.domain.entity.Lot;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface LotRepository extends GenericRepository<Lot, Integer> {
     Optional<Lot> findByIdAndActiveTrue(Integer id);
 
     List<Lot> findAllByActiveIsTrue();
+
+    Optional<Lot> findFirstByAssignmentAndStateTrueAndActiveTrue(LotTypeEnum assignment);
 }

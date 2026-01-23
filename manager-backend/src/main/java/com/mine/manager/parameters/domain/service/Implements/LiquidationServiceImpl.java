@@ -2,6 +2,7 @@ package com.mine.manager.parameters.domain.service.Implements;
 
 import com.mine.manager.common.SpanishEntityNameProvider;
 import com.mine.manager.common.SpecificationUtils;
+import com.mine.manager.common.enums.LiquidationTypeEnum;
 import com.mine.manager.common.enums.StateLoadEnum;
 import com.mine.manager.exception.DuplicateException;
 import com.mine.manager.exception.EntityNotFoundException;
@@ -50,6 +51,8 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
     private final LiquidationMapper liquidationMapper;
     private final SupplierService supplierService;
     private final MineService mineService;
+    private final MineralService mineralService;
+    private final TypeMineralService typeMineralService;
     private final CooperativeService cooperativeService;
     private final LoadService loadService;
     private final LoadRepository loadRepository;
@@ -86,6 +89,13 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
     public LiquidationPojo create(LiquidationDto dto) {
         Liquidation liquidation = new Liquidation();
         liquidationMapper.fromDto(dto, liquidation);
+        if (liquidation.getLiquidationTypeEnum() == LiquidationTypeEnum.COOPERATIVE
+                && dto.getCooperativeId() == null) {
+
+            throw new InvalidValueException(
+                    "Debe seleccionar una Cooperativa para procesar este tipo de liquidación."
+            );
+        }
         this.updateEntities(dto, liquidation, false);
         calculateTotalPrice(liquidation);
         Liquidation savedLiquidation = liquidationRepository.save(liquidation);
@@ -180,6 +190,7 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
             if (liquidationRepository.existsByLoadIdAndActiveTrue(dto.getLoadId())) {
                 throw new DuplicateException(LIQUIDATION, "Carga", load.getCorrelativeLotCode());
             }
+            load.setState(StateLoadEnum.LIQUIDATED);
         } else {
             if (liquidationRepository.existsByLoadIdAndIdNotAndActiveTrue(dto.getLoadId(), liquidation.getId())) {
                 throw new DuplicateException(LIQUIDATION, "Carga", load.getCorrelativeLotCode());
@@ -195,6 +206,20 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
         if (dto.getCooperativeId() != null) {
             load.setCooperative(cooperativeService.getById(dto.getCooperativeId()));
         }
+
+        if (dto.getMineralId() != null) {
+            load.setMineral(mineralService.getById(dto.getMineralId()));
+        }
+
+        if (dto.getTypeMineralId() != null) {
+            load.setTypeMineral(typeMineralService.getById(dto.getTypeMineralId()));
+        }
+
+        if (dto.getMetricWetTonnes() != null) {
+            load.setWeight(dto.getMetricWetTonnes());
+        }
+
+
         loadRepository.save(load);
         liquidation.setLoad(load);
     }

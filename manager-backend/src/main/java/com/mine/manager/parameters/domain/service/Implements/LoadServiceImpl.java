@@ -19,6 +19,7 @@ import com.mine.manager.parameters.presentation.request.dto.LoadDto;
 import com.mine.manager.parameters.presentation.request.filter.LoadFilter;
 import com.mine.manager.parameters.presentation.response.pojo.CorrelativePojo;
 import com.mine.manager.parameters.presentation.response.pojo.LoadPojo;
+import com.mine.manager.parameters.presentation.response.pojo.LotPojo;
 import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
 import com.mine.manager.util.CodeGeneratorUtil;
 import com.mine.manager.util.FieldsFilterUtil;
@@ -84,7 +85,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
         load.setSupplier(supplierService.getById(dto.getSupplierId()));
         if (!isUpdate) {
             Lot lot = lotService.getLotById(dto.getLotId());
-            if (!lot.getAssignment().equals(LotTypeEnum.RECEPTION)){
+            if (!lot.getAssignment().equals(LotTypeEnum.RECEPTION)) {
                 throw new InvalidValueException("No se puede generar el correlativo: el lote indicado no es de tipo Recepción.");
             }
             load.setLot(lotService.getLotById(dto.getLotId()));
@@ -151,7 +152,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
             nextNumber = lot.getCurrentDocNumber() + 1;
         }
 
-        String code = StringUtil.concatenate(lot.getPrefix(), nextNumber.toString(),"").trim();
+        String code = StringUtil.concatenate(lot.getPrefix(), nextNumber.toString(), "").trim();
 
         if (applyChange) {
             lot.setCurrentDocNumber(nextNumber);
@@ -183,11 +184,12 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
         fields.addLikeField("correlativeLotCode", filter.getCorrelativeLotCode());
         fields.addLikeField("supplier.name", filter.getSupplierName());
         fields.addLikeField("lot.description", filter.getLotDescription());
-        fields.addDateField("date",filter.getStartDate()
-                ,filter.getEndDate()!=null?filter.getEndDate(): LocalDate.now());
+        fields.addDateField("date", filter.getStartDate()
+                , filter.getEndDate() != null ? filter.getEndDate() : LocalDate.now());
         if (filter.getSome() != null && !filter.getSome().isBlank()) {
             List<Integer> someIds = loadRepository.findIdsBySome(filter.getSome());
-            fields.addInSomeField("id", someIds);}
+            fields.addInSomeField("id", someIds);
+        }
         return SpecificationUtils.createSpecification(fields.getFilterFields());
     }
 }

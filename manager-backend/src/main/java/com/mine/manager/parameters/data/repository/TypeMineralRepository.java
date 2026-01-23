@@ -10,17 +10,19 @@ import java.util.List;
 @Repository
 public interface TypeMineralRepository extends GenericRepository<TypeMineral, Integer> {
     Boolean existsByName(String name);
+
     Boolean existsByNameAndIdNot(String name, Integer id);
 
     @Query("""
-                SELECT t FROM TypeMineral t
-                WHERE t.active = true
-                AND (:name IS NULL OR LOWER(t.name) LIKE LOWER(CONCAT('%', :name, '%')))
-                AND (:symbol IS NULL OR LOWER(t.symbol) LIKE LOWER(CONCAT('%', :symbol, '%')))
-                AND (:some IS NULL OR (
-                    LOWER(t.name) LIKE LOWER(CONCAT('%', :some, '%'))
-                    OR LOWER(t.symbol) LIKE LOWER(CONCAT('%', :some, '%'))
-                ))
+            select tm from TypeMineral tm
+            where tm.active = true
+            and (:name is null or tm.name ilike :name)
+            and (:symbol is null or tm.symbol ilike :symbol)
+            and (
+                :some is null or
+                tm.name ilike :some or
+                tm.symbol ilike :some
+            )
             """)
     List<TypeMineral> searchByFilters(
             @Param("name") String name,

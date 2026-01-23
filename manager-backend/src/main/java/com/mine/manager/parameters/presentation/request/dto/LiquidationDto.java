@@ -31,6 +31,11 @@ public class LiquidationDto {
     @Schema(description = "ID de la cooperativa (Opcional)", example = "4")
     private Integer cooperativeId;
 
+    @Schema(description = "ID del mineral", example = "3")
+    private Integer mineralId;
+
+    @Schema(description = "ID del tipo de mineral", example = "2")
+    private Integer typeMineralId;
     // --- FECHAS ---
 
     @NotNull(message = "{liquidation.admissionDate.notNull}")
