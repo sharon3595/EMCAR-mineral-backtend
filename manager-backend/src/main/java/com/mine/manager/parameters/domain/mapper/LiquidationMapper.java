@@ -39,16 +39,16 @@ public class LiquidationMapper {
         // 4. PESOS Y CÁLCULO DE T.M.S.
 
         liquidation.setHumidityPercentage(dto.getHumidityPercentage());
-        liquidation.setMetricWetTonnes(dto.getMetricWetTonnes());
+        liquidation.setMetricWetKilograms(dto.getMetricWetKilograms());
 
-        // LÓGICA: TMS = TMH * ((100 - Humedad) / 100)
-        if (dto.getMetricWetTonnes() != null && dto.getHumidityPercentage() != null) {
+        // LÓGICA: KMS = KMH * ((100 - Humedad) / 100)
+        if (dto.getMetricWetKilograms() != null && dto.getHumidityPercentage() != null) {
             BigDecimal humidityFactor = BigDecimal.valueOf(100)
                     .subtract(dto.getHumidityPercentage())
                     .divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP);
 
-            BigDecimal tms = dto.getMetricWetTonnes().multiply(humidityFactor);
-            liquidation.setDryMetricTonnes(tms.setScale(3, RoundingMode.HALF_UP));
+            BigDecimal tms = dto.getMetricWetKilograms().multiply(humidityFactor);
+            liquidation.setDryMetricKilograms(tms.setScale(3, RoundingMode.HALF_UP));
         }
 
         // 5. COTIZACIONES Y REGALÍAS

@@ -109,7 +109,7 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
 
         BigDecimal mineralValue = valueSilver.add(valueZinc).add(valueLead);
 
-        BigDecimal tms = liquidation.getDryMetricTonnes()
+        BigDecimal tms = liquidation.getDryMetricKilograms()
                 .divide(BigDecimal.valueOf(1000), 6, RoundingMode.HALF_UP);
 
         BigDecimal totalPrice = mineralValue
@@ -215,8 +215,8 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
             load.setTypeMineral(typeMineralService.getById(dto.getTypeMineralId()));
         }
 
-        if (dto.getMetricWetTonnes() != null) {
-            load.setWeight(dto.getMetricWetTonnes());
+        if (dto.getMetricWetKilograms() != null) {
+            load.setWeight(dto.getMetricWetKilograms());
         }
 
 

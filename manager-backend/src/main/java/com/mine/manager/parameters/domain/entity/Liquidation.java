@@ -68,10 +68,10 @@ public class Liquidation extends Base {
     private BigDecimal humidityPercentage;
 
     @Column(nullable = false, precision = 15, scale = 3)
-    private BigDecimal metricWetTonnes;
+    private BigDecimal metricWetKilograms;
 
     @Column(nullable = false, precision = 15, scale = 3)
-    private BigDecimal dryMetricTonnes;
+    private BigDecimal dryMetricKilograms;
 
     @Column(nullable = false, precision = 5, scale = 2)
     private BigDecimal quotationSilver;
