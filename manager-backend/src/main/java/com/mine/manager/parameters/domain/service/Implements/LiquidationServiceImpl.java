@@ -242,14 +242,18 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
         return liquidationRepository;
     }
 
-
     @Override
+    @Transactional
     public void delete(Integer id) {
         Liquidation liquidation = this.getById(id);
         liquidation.setActive(false);
+        Load load = liquidation.getLoad();
+        if (load != null) {
+            load.setState(StateLoadEnum.PENDING);
+            loadRepository.save(load);
+        }
         liquidationRepository.save(liquidation);
     }
-
 
     @Override
     public PagePojo<LiquidationPojo> getByPageAndFilters(int page, int size, String sortBy,
