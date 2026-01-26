@@ -37,7 +37,6 @@ public class UserService {
 
         user.setName(request.getName());
         user.setUsername(request.getUsername());
-        user.setEmail(request.getEmail());
         user.setRole(request.getRole());
         user.setState(request.getState());
         if (request.getPassword() != null && !request.getPassword().isBlank()) {

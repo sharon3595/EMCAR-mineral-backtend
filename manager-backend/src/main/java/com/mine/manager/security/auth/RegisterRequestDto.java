@@ -25,10 +25,6 @@ public class RegisterRequestDto {
     @Size(min = 4, max = 30, message = "{auth.username.size}", groups = {OnCreate.class, OnUpdate.class})
     private String username;
 
-    @NotBlank(message = "{auth.email.not-blank}", groups = {OnCreate.class, OnUpdate.class})
-    @Email(message = "{auth.email.format}", groups = {OnCreate.class, OnUpdate.class})
-    private String email;
-
     @NotBlank(message = "{auth.password.not-blank}", groups = OnCreate.class)
     @Pattern(
             regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$",
