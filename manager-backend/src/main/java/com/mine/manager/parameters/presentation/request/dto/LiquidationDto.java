@@ -100,8 +100,8 @@ public class LiquidationDto {
     @NotNull(message = "{liquidation.weight.notNull}")
     @Positive(message = "{liquidation.weight.positive}")
     @Digits(integer = 12, fraction = 3, message = "{liquidation.weight.digits}")
-    @Schema(description = "Peso en Toneladas Métricas Húmedas", example = "14.500")
-    private BigDecimal metricWetTonnes; // TMH
+    @Schema(description = "Peso en Kilogramos Métricos Húmedos", example = "14.500")
+    private BigDecimal metricWetKilograms; // KMH
 
     // --- COTIZACIONES OFICIALES (Para Regalías) ---
 

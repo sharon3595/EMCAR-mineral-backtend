@@ -55,8 +55,8 @@ public class LiquidationPojo {
     private BigDecimal lawLead;
 
     private BigDecimal humidityPercentage;
-    private BigDecimal metricWetTonnes;
-    private BigDecimal dryMetricTonnes;
+    private BigDecimal metricWetKilograms;
+    private BigDecimal dryMetricKilograms;
 
     private BigDecimal quotationSilver;
     private BigDecimal quotationZinc;
@@ -148,8 +148,8 @@ public class LiquidationPojo {
 
         // Pesos
         this.humidityPercentage = liquidation.getHumidityPercentage();
-        this.metricWetTonnes = liquidation.getMetricWetTonnes();
-        this.dryMetricTonnes = liquidation.getDryMetricTonnes();
+        this.metricWetKilograms = liquidation.getMetricWetKilograms();
+        this.dryMetricKilograms = liquidation.getDryMetricKilograms();
 
         // Cotizaciones
         this.quotationSilver = liquidation.getQuotationSilver();

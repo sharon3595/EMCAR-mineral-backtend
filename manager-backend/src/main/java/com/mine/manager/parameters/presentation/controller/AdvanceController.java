@@ -93,7 +93,7 @@ public class AdvanceController {
     @Operation(summary = "Obtener el monto total de los anticipos por carga")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Monto total de los anticipos por carga", content = @Content)})
-    @GetMapping("/advances/total/{loadId}")
+    @GetMapping("/total/{loadId}")
     public ResponseEntity<TotalAdvancesByLoadPojo> getTotalAdvancesByLoad(
             @PathVariable Integer loadId) {
 
