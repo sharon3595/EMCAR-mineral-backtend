@@ -2,17 +2,12 @@ package com.mine.manager.security.user;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-public class ChangePasswordRequest {
-
-    @NotBlank(message = "La contraseña actual es obligatoria")
-    private String currentPassword;
+public class AdminChangePasswordRequest {
 
     @NotBlank(message = "La nueva contraseña es obligatoria")
     @Pattern(

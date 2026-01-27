@@ -4,11 +4,14 @@ import com.mine.manager.security.auth.AuthenticationResponse;
 import com.mine.manager.security.auth.AuthenticationService;
 import com.mine.manager.security.auth.RegisterRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -51,6 +54,15 @@ public class UserController {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/reset-password/{id}")
+    public ResponseEntity<String> forcePasswordReset(
+            @PathVariable Integer id,
+            @RequestBody @Valid AdminChangePasswordRequest request
+    ) {
+        service.forcePasswordReset(id, request);
+        return ResponseEntity.ok("Contraseña reseteada exitosamente por el administrador");
     }
 }
 

@@ -18,53 +18,53 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-  private final UserRepository repository;
-  private final PasswordEncoder passwordEncoder;
-  private final JwtService jwtService;
-  private final AuthenticationManager authenticationManager;
+    private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
-  public AuthenticationResponse register(RegisterRequestDto request) {
-    if (repository.existsByUsernameAndStateTrue(request.getUsername())) {
-      throw new DuplicateException("Usuario", "nombre", request.getUsername());
+    public AuthenticationResponse register(RegisterRequestDto request) {
+        if (repository.existsByUsernameAndStateTrue(request.getUsername())) {
+            throw new DuplicateException("Usuario", "nombre", request.getUsername());
+        }
+        var user = User.builder()
+                .name(request.getName())
+                .surname(request.getSurname())
+                .username(request.getUsername())
+                .state(request.getState())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(request.getRole())
+                .build();
+
+        repository.save(user);
+
+        return getAuthenticationResponse(user);
     }
-    var user = User.builder()
-            .name(request.getName())
-            .surname(request.getSurname())
-            .username(request.getUsername())
-            .state(request.getState())
-            .password(passwordEncoder.encode(request.getPassword()))
-            .role(request.getRole())
-            .build();
 
-    repository.save(user);
+    private AuthenticationResponse getAuthenticationResponse(User user) {
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("role", user.getRole().name());
+        extraClaims.put(
+                "permissions",
+                user.getRole()
+                        .getPermissions()
+                        .stream()
+                        .map(Permission::getPermission)
+                        .toList()
+        );
+        extraClaims.put("userId", user.getId());
+        var jwtToken = jwtService.generateToken(extraClaims, user);
+        return AuthenticationResponse.builder().token(jwtToken).fullname(String.format(
+                "%s %s", user.getName(), user.getSurname()
+        )).build();
+    }
 
-    return getAuthenticationResponse(user);
-  }
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+        );
+        var user = repository.findByUsernameAndStateTrue(request.getUsername()).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
 
-  private AuthenticationResponse getAuthenticationResponse(User user) {
-    Map<String, Object> extraClaims = new HashMap<>();
-    extraClaims.put("role", user.getRole().name());
-    extraClaims.put(
-            "permissions",
-            user.getRole()
-                    .getPermissions()
-                    .stream()
-                    .map(Permission::getPermission)
-                    .toList()
-    );
-    extraClaims.put("userId", user.getId());
-    var jwtToken = jwtService.generateToken(extraClaims, user);
-    return AuthenticationResponse.builder().token(jwtToken).fullname(String.format(
-            "%s %s",user.getName(),user.getSurname()
-    )).build();
-  }
-
-  public AuthenticationResponse authenticate(AuthenticationRequest request) {
-    authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-    );
-    var user = repository.findByUsernameAndStateTrue(request.getUsername()).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
-
-    return getAuthenticationResponse(user);
-  }
+        return getAuthenticationResponse(user);
+    }
 }
