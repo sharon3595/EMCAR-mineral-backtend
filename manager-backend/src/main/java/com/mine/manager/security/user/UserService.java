@@ -2,7 +2,9 @@ package com.mine.manager.security.user;
 
 import com.mine.manager.exception.DuplicateException;
 import com.mine.manager.exception.EntityNotFoundException;
+import com.mine.manager.exception.InvalidValueException;
 import com.mine.manager.security.auth.RegisterRequestDto;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -68,5 +70,16 @@ public class UserService {
                 .role(user.getRole())
                 .state(user.getState())
                 .build();
+    }
+
+    @Transactional
+    public void forcePasswordReset(Integer userId, AdminChangePasswordRequest request) {
+        if (!request.getNewPassword().equals(request.getConfirmationPassword())) {
+            throw new InvalidValueException("Las contraseñas no coinciden");
+        }
+        User user = repository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        repository.save(user);
     }
 }
