@@ -7,10 +7,7 @@ import com.mine.manager.common.enums.StateLoadEnum;
 import com.mine.manager.exception.EntityNotFoundException;
 import com.mine.manager.exception.HasAsociatedEntityException;
 import com.mine.manager.exception.InvalidValueException;
-import com.mine.manager.parameters.data.repository.AdvanceRepository;
-import com.mine.manager.parameters.data.repository.GenericRepository;
-import com.mine.manager.parameters.data.repository.LiquidationRepository;
-import com.mine.manager.parameters.data.repository.LoadRepository;
+import com.mine.manager.parameters.data.repository.*;
 import com.mine.manager.parameters.domain.entity.Load;
 import com.mine.manager.parameters.domain.entity.Lot;
 import com.mine.manager.parameters.domain.mapper.LoadMapper;
@@ -51,6 +48,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
     private final CooperativeService cooperativeService;
     private final AdvanceRepository advanceRepository;
     private final LiquidationRepository liquidationRepository;
+    private final LotRepository lotRepository;
 
     private static final String LOAD = SpanishEntityNameProvider.getSpanishName(Load.class.getSimpleName());
 
@@ -76,6 +74,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
         this.updateEntities(dto, load, false);
         CorrelativePojo correlative = this.processCorrelative(load.getLot().getId(), true);
         load.setCorrelativeLotCode(correlative.getCorrelative());
+        load.setCurrentDocNumber(correlative.getCurrentDocNumber());
         load.setState(StateLoadEnum.PENDING);
         Load savedLoad = loadRepository.save(load);
         return loadMapper.toPojo(savedLoad);
@@ -137,6 +136,18 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
                     "No se puede eliminar la carga porque tiene liquidaciones asociadas."
             );
         }
+        Lot lot = load.getLot();
+        if (lot.getCurrentDocNumber() != null && lot.getCurrentDocNumber().equals(load.getCurrentDocNumber())) {
+
+            int nextDocNumber = lot.getCurrentDocNumber() - 1;
+            if (nextDocNumber < lot.getInitialDocNumber()) {
+                lot.setCurrentDocNumber(null);
+            } else {
+                lot.setCurrentDocNumber(nextDocNumber);
+            }
+
+            lotRepository.save(lot);
+        }
         load.setActive(false);
         loadRepository.save(load);
     }
@@ -158,7 +169,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
             lot.setCurrentDocNumber(nextNumber);
         }
 
-        return new CorrelativePojo(code);
+        return new CorrelativePojo(code, nextNumber);
     }
 
     @Override

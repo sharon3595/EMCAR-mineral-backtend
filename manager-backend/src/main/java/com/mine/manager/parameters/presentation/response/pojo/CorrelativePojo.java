@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CorrelativePojo {
     private String correlative;
+    private Integer currentDocNumber;
 }

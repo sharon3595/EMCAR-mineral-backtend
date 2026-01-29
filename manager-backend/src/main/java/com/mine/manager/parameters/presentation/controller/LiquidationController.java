@@ -80,7 +80,7 @@ public class LiquidationController {
     }
 
 
-    @Operation(summary = "Eliminar liquidación por su ID")
+    /*@Operation(summary = "Eliminar liquidación por su ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "liquidación eliminada"),
             @ApiResponse(responseCode = "400", description = "Id incorrecto", content = @Content)
@@ -89,7 +89,7 @@ public class LiquidationController {
     public ResponseEntity<Object> delete(@PathVariable Integer id) {
         liquidationService.delete(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
 
     @Operation(summary = "Listar liquidaciones aplicando filtros.")

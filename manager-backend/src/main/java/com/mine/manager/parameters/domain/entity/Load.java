@@ -36,6 +36,8 @@ public class Load extends Base{
     @Column(length = 50, nullable = false)
     private String correlativeLotCode;
 
+    private Integer currentDocNumber;
+
     @ManyToOne
     @JoinColumn(name = "mineral_id", nullable = false)
     private Mineral mineral;
