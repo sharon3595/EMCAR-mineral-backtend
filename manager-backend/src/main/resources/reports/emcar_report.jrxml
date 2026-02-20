@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="emcar_report" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="daf8060f-8eca-4a18-8ac8-23e789aa315f">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMCAR.jrdax"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<style name="Table 2_TH" mode="Opaque" backcolor="#D9D9D9">
 		<box>
@@ -536,7 +536,7 @@ WHERE lq.active = true
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="83" splitType="Stretch">
+		<band height="75" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<rectangle radius="1">
 				<reportElement positionType="FixRelativeToBottom" x="440" y="0" width="131" height="75" uuid="923524fb-f317-495c-9d9e-8ba3315a86f8"/>
@@ -545,7 +545,7 @@ WHERE lq.active = true
 				</graphicElement>
 			</rectangle>
 			<image>
-				<reportElement x="440" y="1" width="129" height="74" uuid="ab21bb51-30a9-436b-b9fa-4d1f9573a2a4"/>
+				<reportElement x="441" y="1" width="129" height="74" uuid="ab21bb51-30a9-436b-b9fa-4d1f9573a2a4"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<staticText>
@@ -610,7 +610,9 @@ WHERE lq.active = true
 		<band height="91" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="0" y="1" width="100" height="17" uuid="04970a9d-dd0e-4588-a3e7-02fe9741d7f0"/>
+				<reportElement x="0" y="1" width="100" height="15" uuid="04970a9d-dd0e-4588-a3e7-02fe9741d7f0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<pen lineWidth="5.75" lineStyle="Dashed" lineColor="#CFD43D"/>
 					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
@@ -624,7 +626,9 @@ WHERE lq.active = true
 				<text><![CDATA[ Nº. LOTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="18" width="100" height="17" uuid="737a56b3-4dc9-4585-9d01-a1c3bea449a2"/>
+				<reportElement x="0" y="16" width="100" height="15" uuid="737a56b3-4dc9-4585-9d01-a1c3bea449a2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
 					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
@@ -637,9 +641,7 @@ WHERE lq.active = true
 				<text><![CDATA[ NOMBRE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="35" width="100" height="18" uuid="1274bccd-57ac-41c6-8933-af4e7b438d5a">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
+				<reportElement x="0" y="31" width="100" height="15" uuid="1274bccd-57ac-41c6-8933-af4e7b438d5a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
 					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
@@ -652,9 +654,7 @@ WHERE lq.active = true
 				<text><![CDATA[ COOPERATIVA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="53" width="100" height="18" uuid="0d7757ed-32db-473a-877a-de5e7d757d8a">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
+				<reportElement x="0" y="46" width="100" height="15" uuid="0d7757ed-32db-473a-877a-de5e7d757d8a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
 					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
@@ -667,7 +667,9 @@ WHERE lq.active = true
 				<text><![CDATA[ MINA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="289" y="1" width="142" height="17" uuid="a4623929-f320-41c4-9aac-85d403f26055"/>
+				<reportElement x="289" y="1" width="142" height="15" uuid="a4623929-f320-41c4-9aac-85d403f26055">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<pen lineWidth="3.0"/>
 					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
@@ -681,7 +683,9 @@ WHERE lq.active = true
 				<text><![CDATA[ TIPO DE CAMBIO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="289" y="18" width="142" height="17" uuid="98f5c897-71e9-4c4f-a5f1-bcf7ef8897d1"/>
+				<reportElement x="289" y="16" width="142" height="15" uuid="98f5c897-71e9-4c4f-a5f1-bcf7ef8897d1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
 					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
@@ -694,9 +698,7 @@ WHERE lq.active = true
 				<text><![CDATA[ FECHA DE INGRESO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="289" y="35" width="142" height="18" uuid="1d6e25be-15cf-4932-b031-0b03a3c134da">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
+				<reportElement x="289" y="31" width="142" height="15" uuid="1d6e25be-15cf-4932-b031-0b03a3c134da"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
 					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
@@ -709,7 +711,7 @@ WHERE lq.active = true
 				<text><![CDATA[ FECHA DE LIQUIDACION:]]></text>
 			</staticText>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" isBlankWhenNull="true">
-				<reportElement x="431" y="53" width="140" height="18" uuid="ccb209d5-b2e5-4466-a712-35cfbb59ab1f">
+				<reportElement x="431" y="46" width="140" height="15" uuid="ccb209d5-b2e5-4466-a712-35cfbb59ab1f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -723,9 +725,7 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{material_name}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="289" y="53" width="142" height="18" uuid="b54ef109-5e03-4ee5-8a80-724b82a75cd6">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
+				<reportElement x="289" y="46" width="142" height="15" uuid="b54ef109-5e03-4ee5-8a80-724b82a75cd6"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
 					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
@@ -738,9 +738,8 @@ WHERE lq.active = true
 				<text><![CDATA[ MINERAL:]]></text>
 			</staticText>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="dd/MM/yy" isBlankWhenNull="true">
-				<reportElement x="431" y="35" width="140" height="18" uuid="8bab22be-cca7-4147-bc79-10be0956a2a1">
+				<reportElement x="431" y="31" width="140" height="15" uuid="8bab22be-cca7-4147-bc79-10be0956a2a1">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
@@ -752,9 +751,8 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{liquidation_date}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" pattern="dd/MM/yy" isBlankWhenNull="true">
-				<reportElement x="431" y="18" width="140" height="17" uuid="71338ee6-3466-4329-a516-befd5fa68870">
+				<reportElement x="431" y="16" width="140" height="15" uuid="71338ee6-3466-4329-a516-befd5fa68870">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
@@ -766,9 +764,8 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{admission_date}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" isBlankWhenNull="true">
-				<reportElement x="431" y="1" width="140" height="17" uuid="591c83f6-84f0-478c-a842-1f728cd33e51">
+				<reportElement x="431" y="1" width="140" height="15" uuid="591c83f6-84f0-478c-a842-1f728cd33e51">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="3.0"/>
@@ -781,9 +778,8 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[" - "]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" isBlankWhenNull="true">
-				<reportElement x="100" y="53" width="189" height="18" uuid="3226b6e5-d127-4eae-a6f3-4236dce1db84">
+				<reportElement x="100" y="46" width="189" height="15" uuid="3226b6e5-d127-4eae-a6f3-4236dce1db84">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
@@ -795,9 +791,8 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{mine_name}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" isBlankWhenNull="true">
-				<reportElement x="100" y="35" width="189" height="18" uuid="675c92fa-9f77-4944-bd51-235751637320">
+				<reportElement x="100" y="31" width="189" height="15" uuid="675c92fa-9f77-4944-bd51-235751637320">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
@@ -809,9 +804,8 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{cooperative_name}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" isBlankWhenNull="true">
-				<reportElement x="100" y="1" width="189" height="17" uuid="9171e61c-7c04-4aaa-90a8-1d3ab3e8bb13">
+				<reportElement x="100" y="1" width="189" height="15" uuid="9171e61c-7c04-4aaa-90a8-1d3ab3e8bb13">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="3.0"/>
@@ -824,9 +818,8 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{correlative_lot_code}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" isBlankWhenNull="true">
-				<reportElement x="100" y="18" width="189" height="17" uuid="66495592-bf7a-49d2-80eb-0d126f5fcf81">
+				<reportElement x="100" y="16" width="189" height="15" uuid="66495592-bf7a-49d2-80eb-0d126f5fcf81">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
@@ -835,10 +828,10 @@ WHERE lq.active = true
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle" markup="none"/>
-				<textFieldExpression><![CDATA[$F{supplier_name} +" " +$F{supplier_surname}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{supplier_name} +" " +($F{supplier_surname}==null?"":$F{supplier_surname})]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.###;###0.###" isBlankWhenNull="true">
-				<reportElement x="289" y="71" width="189" height="20" uuid="fa5d67a5-72eb-4718-9a16-3419a567aa39">
+				<reportElement x="289" y="61" width="189" height="20" uuid="fa5d67a5-72eb-4718-9a16-3419a567aa39">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -854,7 +847,7 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{metric_wet_kilograms}.divide(new java.math.BigDecimal(1000))]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="71" width="100" height="20" uuid="f16b1c14-4865-4953-9277-336ea92141d2">
+				<reportElement x="0" y="61" width="100" height="20" uuid="f16b1c14-4865-4953-9277-336ea92141d2">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -869,7 +862,7 @@ WHERE lq.active = true
 				<text><![CDATA[K.M.H.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="220" y="70" width="70" height="20" uuid="e9e6e733-4ec0-4795-83b5-cec7f2cd2b6f">
+				<reportElement x="220" y="60" width="70" height="20" uuid="e9e6e733-4ec0-4795-83b5-cec7f2cd2b6f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -884,7 +877,7 @@ WHERE lq.active = true
 				<text><![CDATA[T.M.H.]]></text>
 			</staticText>
 			<textField pattern="###0.###;###0.###" isBlankWhenNull="true">
-				<reportElement x="101" y="71" width="119" height="20" uuid="fda8b97f-c72e-4b35-828a-6d0e92c60597">
+				<reportElement x="100" y="61" width="119" height="20" uuid="fda8b97f-c72e-4b35-828a-6d0e92c60597">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -900,9 +893,9 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{metric_wet_kilograms}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="91">
+		<band height="67">
 			<staticText>
-				<reportElement mode="Opaque" x="1" y="20" width="98" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="c8f61585-d52a-4acc-b19a-9e226724f3e6"/>
+				<reportElement mode="Opaque" x="1" y="10" width="98" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="c8f61585-d52a-4acc-b19a-9e226724f3e6"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -915,7 +908,7 @@ WHERE lq.active = true
 				<text><![CDATA[P.N.S.(Kg.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="99" y="20" width="70" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="0298cba1-fdc4-4864-93ea-c3cb66352843"/>
+				<reportElement mode="Opaque" x="99" y="10" width="70" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="0298cba1-fdc4-4864-93ea-c3cb66352843"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -928,7 +921,7 @@ WHERE lq.active = true
 				<text><![CDATA[AG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="169" y="20" width="70" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="e2d09031-b4f8-4b89-bde4-24f058853d70"/>
+				<reportElement mode="Opaque" x="169" y="10" width="70" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="e2d09031-b4f8-4b89-bde4-24f058853d70"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -941,7 +934,7 @@ WHERE lq.active = true
 				<text><![CDATA[ZN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="239" y="20" width="70" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="6a008531-b5fe-4332-b8a4-df982af11cdd"/>
+				<reportElement mode="Opaque" x="239" y="10" width="70" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="6a008531-b5fe-4332-b8a4-df982af11cdd"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -954,7 +947,7 @@ WHERE lq.active = true
 				<text><![CDATA[PB]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="309" y="20" width="96" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="8c9a56c3-9418-4740-9d6c-c4a3411ff764"/>
+				<reportElement mode="Opaque" x="309" y="10" width="96" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="8c9a56c3-9418-4740-9d6c-c4a3411ff764"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -967,7 +960,7 @@ WHERE lq.active = true
 				<text><![CDATA[$US]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="405" y="20" width="85" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="9d5f930a-4c28-48ac-9833-279d944c0ef8"/>
+				<reportElement mode="Opaque" x="405" y="10" width="85" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="9d5f930a-4c28-48ac-9833-279d944c0ef8"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -980,7 +973,7 @@ WHERE lq.active = true
 				<text><![CDATA[Bs]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="490" y="20" width="80" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="313b4a18-6491-4e80-a96e-e6fea9808a53"/>
+				<reportElement mode="Opaque" x="490" y="10" width="80" height="19" forecolor="#0A0A0A" backcolor="#E6E6E6" uuid="313b4a18-6491-4e80-a96e-e6fea9808a53"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -993,7 +986,7 @@ WHERE lq.active = true
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="99" y="1" width="210" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="b43d97ad-615b-4478-8e02-ad9c5d2f32ca"/>
+				<reportElement mode="Opaque" x="99" y="-9" width="210" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="b43d97ad-615b-4478-8e02-ad9c5d2f32ca"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -1006,7 +999,7 @@ WHERE lq.active = true
 				<text><![CDATA[LEYES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="490" y="1" width="80" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="9194db3d-c9b0-4df3-81bf-d3470cb2c857"/>
+				<reportElement mode="Opaque" x="490" y="-9" width="80" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="9194db3d-c9b0-4df3-81bf-d3470cb2c857"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -1019,7 +1012,7 @@ WHERE lq.active = true
 				<text><![CDATA[IMPORTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="405" y="1" width="85" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="fe66fe50-5520-4f0d-9816-8eb2f6464afe"/>
+				<reportElement mode="Opaque" x="405" y="-9" width="85" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="fe66fe50-5520-4f0d-9816-8eb2f6464afe"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -1032,7 +1025,7 @@ WHERE lq.active = true
 				<text><![CDATA[PRECIO TN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="309" y="1" width="96" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="6bdca711-2d39-4504-b6e2-1be91c6ae830"/>
+				<reportElement mode="Opaque" x="309" y="-9" width="96" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="6bdca711-2d39-4504-b6e2-1be91c6ae830"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -1045,7 +1038,10 @@ WHERE lq.active = true
 				<text><![CDATA[PRECIO TN]]></text>
 			</staticText>
 			<textField textAdjust="StretchHeight" pattern="###0.###;###0.###" isBlankWhenNull="true">
-				<reportElement key="" mode="Transparent" x="1" y="39" width="98" height="21" backcolor="#E64543" uuid="a8a809f6-2d27-4ac8-9337-09fea1aea949"/>
+				<reportElement key="" mode="Transparent" x="1" y="29" width="98" height="15" backcolor="#E64543" uuid="a8a809f6-2d27-4ac8-9337-09fea1aea949">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1058,7 +1054,9 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{dry_metric_kilograms}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" pattern="###0.##" isBlankWhenNull="true">
-				<reportElement key="" mode="Transparent" x="99" y="39" width="70" height="21" backcolor="#E64543" uuid="9ab1beae-1ea6-4a60-ae13-8574ce9e5353"/>
+				<reportElement key="" mode="Transparent" x="99" y="29" width="70" height="15" backcolor="#E64543" uuid="9ab1beae-1ea6-4a60-ae13-8574ce9e5353">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1071,7 +1069,9 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{law_silver}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" pattern="###0.##" isBlankWhenNull="true">
-				<reportElement key="" mode="Transparent" x="169" y="39" width="70" height="21" backcolor="#E64543" uuid="ff5c4565-c622-4c62-9f58-15b173244567"/>
+				<reportElement key="" mode="Transparent" x="169" y="29" width="70" height="15" backcolor="#E64543" uuid="ff5c4565-c622-4c62-9f58-15b173244567">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1084,7 +1084,9 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{law_zinc}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" pattern="###0.##" isBlankWhenNull="true">
-				<reportElement key="" mode="Transparent" x="239" y="39" width="70" height="21" backcolor="#E64543" uuid="b04e9141-150c-4262-b999-445fd950a835"/>
+				<reportElement key="" mode="Transparent" x="239" y="29" width="70" height="15" backcolor="#E64543" uuid="b04e9141-150c-4262-b999-445fd950a835">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1097,7 +1099,9 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{law_lead}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" pattern="###0.##" isBlankWhenNull="true">
-				<reportElement key="" mode="Transparent" x="309" y="39" width="96" height="21" backcolor="#E64543" uuid="6002261f-a4c2-4e69-a115-48b3b75df3fb"/>
+				<reportElement key="" mode="Transparent" x="309" y="29" width="96" height="15" backcolor="#E64543" uuid="6002261f-a4c2-4e69-a115-48b3b75df3fb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1110,7 +1114,9 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{total_ley_por_precio}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" pattern="###0.##" isBlankWhenNull="true">
-				<reportElement key="" mode="Transparent" x="405" y="39" width="85" height="21" backcolor="#E64543" uuid="8d096581-e12c-4755-8f98-63baee278a0b"/>
+				<reportElement key="" mode="Transparent" x="405" y="29" width="85" height="15" backcolor="#E64543" uuid="8d096581-e12c-4755-8f98-63baee278a0b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1123,7 +1129,9 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{total_ley_por_precio_bs}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" pattern="###0.##" isBlankWhenNull="true">
-				<reportElement key="" mode="Transparent" x="490" y="39" width="80" height="21" backcolor="#E64543" uuid="aeacbbfe-0286-402d-82e5-f99b2d129d6a"/>
+				<reportElement key="" mode="Transparent" x="490" y="29" width="80" height="15" backcolor="#E64543" uuid="aeacbbfe-0286-402d-82e5-f99b2d129d6a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1136,7 +1144,7 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{total_price}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="309" y="60" width="181" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="0ab5ec6d-0acb-482e-8493-e200eda10556"/>
+				<reportElement mode="Opaque" x="309" y="44" width="181" height="19" forecolor="#0A0A0A" backcolor="#FFFCFC" uuid="0ab5ec6d-0acb-482e-8493-e200eda10556"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#0A0A0A"/>
@@ -1149,7 +1157,7 @@ WHERE lq.active = true
 				<text><![CDATA[TOTAL DESCUENTOS]]></text>
 			</staticText>
 			<textField textAdjust="ScaleFont" pattern="###0.##" isBlankWhenNull="true">
-				<reportElement key="" mode="Transparent" x="490" y="60" width="80" height="19" backcolor="#E64543" uuid="96d9d2df-3c79-4910-b9f1-0f04a7fe4f7e"/>
+				<reportElement key="" mode="Transparent" x="490" y="44" width="80" height="19" backcolor="#E64543" uuid="96d9d2df-3c79-4910-b9f1-0f04a7fe4f7e"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1162,7 +1170,7 @@ WHERE lq.active = true
 				<textFieldExpression><![CDATA[$F{discounts}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="71" width="100" height="20" uuid="f53d790f-5b74-450c-9cb5-7f3694ad77ee">
+				<reportElement x="0" y="47" width="100" height="20" uuid="f53d790f-5b74-450c-9cb5-7f3694ad77ee">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -1995,9 +2003,9 @@ WHERE lq.active = true
 				<text><![CDATA[ANTICIPO II]]></text>
 			</staticText>
 		</band>
-		<band height="147">
+		<band height="102">
 			<staticText>
-				<reportElement x="347" y="82" width="144" height="21" uuid="abd0ed7f-96b3-445b-b155-29dcf6e8009d">
+				<reportElement x="347" y="47" width="144" height="21" uuid="abd0ed7f-96b3-445b-b155-29dcf6e8009d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -2012,7 +2020,7 @@ WHERE lq.active = true
 				<text><![CDATA[INTERESADO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="60" y="83" width="144" height="20" uuid="933a7f48-6b3b-4281-a726-fea923481e6a">
+				<reportElement x="60" y="48" width="144" height="20" uuid="933a7f48-6b3b-4281-a726-fea923481e6a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -2027,7 +2035,7 @@ WHERE lq.active = true
 				<text><![CDATA[COMERCIALIZADOR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="6" y="57" width="244" height="22" uuid="857b0c03-5e68-4605-9d10-7442a61bf9a3">
+				<reportElement x="6" y="22" width="244" height="22" uuid="857b0c03-5e68-4605-9d10-7442a61bf9a3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -2041,7 +2049,7 @@ WHERE lq.active = true
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="310" y="58" width="228" height="22" uuid="80fc28df-542e-48a5-ba62-59c7a3153b23">
+				<reportElement x="310" y="23" width="228" height="22" uuid="80fc28df-542e-48a5-ba62-59c7a3153b23">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -2055,7 +2063,7 @@ WHERE lq.active = true
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="347" y="106" width="144" height="21" uuid="115009fd-5f26-48c3-884c-9bbc61be04e1">
+				<reportElement x="314" y="71" width="144" height="15" uuid="115009fd-5f26-48c3-884c-9bbc61be04e1">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -2065,14 +2073,12 @@ WHERE lq.active = true
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="347" y="126" width="144" height="21" uuid="cd661c17-d4f1-4ada-aa26-b7163370b90a">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
+				<reportElement x="314" y="87" width="144" height="15" uuid="cd661c17-d4f1-4ada-aa26-b7163370b90a"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -2080,7 +2086,7 @@ WHERE lq.active = true
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[C.I.:]]></text>
 			</staticText>

@@ -600,7 +600,7 @@ WHERE lq.active = true
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle" markup="none"/>
-				<textFieldExpression><![CDATA[$F{supplier_name} +" " +$F{supplier_surname}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{supplier_name} +" " +($F{supplier_surname}==null?"":$F{supplier_surname})]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="60">
@@ -1039,7 +1039,7 @@ WHERE lq.active = true
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textField isBlankWhenNull="true">
+				<textField textAdjust="ScaleFont" isBlankWhenNull="true">
 					<reportElement x="4" y="12" width="556" height="18" uuid="19db8c4e-5c76-4a96-acd4-3d89cd9cd828"/>
 					<textElement>
 						<font size="12" isBold="true"/>
