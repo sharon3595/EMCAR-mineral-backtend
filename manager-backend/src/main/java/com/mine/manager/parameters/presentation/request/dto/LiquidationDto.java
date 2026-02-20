@@ -54,6 +54,13 @@ public class LiquidationDto {
     @Schema(description = "Tipo de cambio oficial", example = "6.96")
     private BigDecimal exchangeRate;
 
+
+    @NotNull(message = "{liquidation.exchangeRate.notNull}")
+    @Positive(message = "{liquidation.exchangeRate.positive}")
+    @Digits(integer = 8, fraction = 2, message = "{liquidation.exchangeRate.digits}")
+    @Schema(description = "Tipo de cambio oficial para el liquido pagable", example = "6.96")
+    private BigDecimal exchangeRateAmountPayable;
+
     // --- PRECIOS DEL MINERAL ---
 
     @PositiveOrZero(message = "{liquidation.amount.positive}")

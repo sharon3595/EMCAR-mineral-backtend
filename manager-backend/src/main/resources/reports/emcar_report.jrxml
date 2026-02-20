@@ -778,7 +778,7 @@ WHERE lq.active = true
 					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle" markup="none"/>
-				<textFieldExpression><![CDATA[$F{exchange_rate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[" - "]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" evaluationTime="Auto" isBlankWhenNull="true">
 				<reportElement x="100" y="53" width="189" height="18" uuid="3226b6e5-d127-4eae-a6f3-4236dce1db84">

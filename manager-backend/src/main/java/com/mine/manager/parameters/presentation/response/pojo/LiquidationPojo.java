@@ -47,6 +47,7 @@ public class LiquidationPojo {
     private LocalDate liquidationDate;
 
     private BigDecimal exchangeRate;
+    private BigDecimal exchangeRateAmountPayable;
 
     private BigDecimal priceSilver;
     private BigDecimal priceZinc;
@@ -142,6 +143,7 @@ public class LiquidationPojo {
 
 
         this.exchangeRate = liquidation.getExchangeRate();
+        this.exchangeRateAmountPayable = liquidation.getExchangeRateAmountPayable();
 
         // Precios
         this.priceSilver = liquidation.getPriceSilver();

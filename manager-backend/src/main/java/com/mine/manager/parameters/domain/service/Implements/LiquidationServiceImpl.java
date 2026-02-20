@@ -162,7 +162,7 @@ public class LiquidationServiceImpl extends CRUDServiceImpl<Liquidation, Integer
 
 
         BigDecimal amountPayableTc = netPrice
-                .divide(liquidation.getExchangeRate(), 2, RoundingMode.HALF_UP);
+                .divide(liquidation.getExchangeRateAmountPayable(), 2, RoundingMode.HALF_UP);
 
         liquidation.setAmountPayableTc(amountPayableTc);
 

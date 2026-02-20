@@ -23,6 +23,7 @@ public class LiquidationMapper {
         liquidation.setAdmissionDate(dto.getAdmissionDate());
         liquidation.setLiquidationDate(dto.getLiquidationDate());
         liquidation.setExchangeRate(dto.getExchangeRate());
+        liquidation.setExchangeRateAmountPayable(dto.getExchangeRateAmountPayable());
 
         // 2. PRECIOS
         liquidation.setPriceSilver(dto.getPriceSilver());

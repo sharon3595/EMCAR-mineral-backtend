@@ -258,7 +258,53 @@ public class PercentageLiquidationServiceImpl extends CRUDServiceImpl<Percentage
         return percentageLiquidationMapper.fromPageToPagePojo(filtered);
     }
 
+    @Override
+    public byte[] generatePercentageLiquidationPdf(Integer idPercentageLiquidation) {
 
+        PercentageLiquidationPojo liquidation = this.getPercentageLiquidationById(idPercentageLiquidation);
+
+        try {
+            InputStream reportStream =
+                    getClass().getResourceAsStream("/reports/emcar_percentage_report.jrxml");
+
+            JasperReport jasperReport =
+                    JasperCompileManager.compileReport(reportStream);
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("idLiquidation", idPercentageLiquidation);
+
+            BigDecimal amount = liquidation.getAmountPayableBc();
+
+            if (amount != null) {
+                int parteEntera = amount.intValue();
+
+                int cents = amount.remainder(BigDecimal.ONE)
+                        .multiply(new BigDecimal("100"))
+                        .intValue();
+
+                String letters = com.mine.manager.util.NumberToLetters.convertToLetters(new BigDecimal(parteEntera));
+
+                String totalLiteral = String.format("SON: %s %02d/100 BOLIVIANOS", letters, cents);
+
+                params.put("total", totalLiteral);
+            } else {
+                params.put("total", "SON: CERO 00/100 BOLIVIANOS");
+            }
+
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(
+                            jasperReport,
+                            params,
+                            dataSource.getConnection()
+                    );
+
+            return JasperExportManager.exportReportToPdf(jasperPrint);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error generando PDF de liquidación", e);
+        }
+    }
+/*
     @Override
     public byte[] generatePercentageLiquidationPdf(Integer idPercentageLiquidation) {
 
@@ -299,7 +345,7 @@ public class PercentageLiquidationServiceImpl extends CRUDServiceImpl<Percentage
             throw new RuntimeException("Error generando PDF de liquidación", e);
         }
     }
-
+*/
 
     @Override
     public List<PercentageLiquidationPojo> getFiltered(LiquidationFilter filter) {

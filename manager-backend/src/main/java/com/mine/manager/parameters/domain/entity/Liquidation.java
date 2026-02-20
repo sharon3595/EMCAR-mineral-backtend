@@ -46,6 +46,9 @@ public class Liquidation extends Base {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal exchangeRate;
 
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal exchangeRateAmountPayable;
+
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal priceSilver;
 
