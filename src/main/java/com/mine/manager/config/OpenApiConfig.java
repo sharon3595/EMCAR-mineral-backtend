@@ -23,11 +23,7 @@ import org.springframework.context.annotation.Configuration;
         ),
         servers = {
                 @Server(
-                        description = "Servidor Producción (Render)",
-                        url = "https://emcar-mineral-backtend.onrender.com"
-                ),
-                @Server(
-                        description = "Servidor Producción (Render)",
+                        description = "Servidor Producción (DigitalOcean)",
                         url = "https://comcar-app-9lxoj.ondigitalocean.app/api"
                 ),
                 @Server(
