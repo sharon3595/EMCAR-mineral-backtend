@@ -13,6 +13,7 @@ La documentación técnica de los endpoints (API) se encuentra disponible vía S
 
 * **Swagger local UI:** [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 * **Swagger prod UI:** [https://emcar-mineral-backtend.onrender.com/swagger-ui/index.html](https://emcar-mineral-backtend.onrender.com/swagger-ui/index.html)
+* emcar-mineral-backtend-production.up.railway.app
 * **JSON Docs:** [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
 ## Prerrequisitos
