@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
         servers = {
                 @Server(
                         description = "Servidor Producción (DigitalOcean)",
-                        url = "https://comcar-app-9lxoj.ondigitalocean.app/api"
+                        url = "https://comcar-app-9lxoj.ondigitalocean.app"
                 ),
                 @Server(
                         description = "Servidor Local",
