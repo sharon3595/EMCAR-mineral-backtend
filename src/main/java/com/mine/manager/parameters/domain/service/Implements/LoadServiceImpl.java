@@ -150,6 +150,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
         load.setActive(false);
         load.setState(StateLoadEnum.INACTIVE);
         loadRepository.save(load);
+
     }
 
     @Override
