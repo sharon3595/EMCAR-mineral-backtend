@@ -16,7 +16,6 @@ import com.mine.manager.parameters.presentation.request.dto.LoadDto;
 import com.mine.manager.parameters.presentation.request.filter.LoadFilter;
 import com.mine.manager.parameters.presentation.response.pojo.CorrelativePojo;
 import com.mine.manager.parameters.presentation.response.pojo.LoadPojo;
-import com.mine.manager.parameters.presentation.response.pojo.LotPojo;
 import com.mine.manager.parameters.presentation.response.pojo.PagePojo;
 import com.mine.manager.util.CodeGeneratorUtil;
 import com.mine.manager.util.FieldsFilterUtil;
@@ -149,7 +148,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
             lotRepository.save(lot);
         }*/
         load.setActive(false);
-        load.setState(StateLoadEnum.DELETE);
+        load.setState(StateLoadEnum.INACTIVE);
         loadRepository.save(load);
     }
 

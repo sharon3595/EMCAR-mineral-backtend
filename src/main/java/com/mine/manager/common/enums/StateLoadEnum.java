@@ -9,7 +9,7 @@ public enum StateLoadEnum {
 
     PENDING("Pendiente"),
     LIQUIDATED("Liquidado"),
-    DELETE("Eliminado");
+    INACTIVE("Eliminado");
 
     private final String value;
 }
