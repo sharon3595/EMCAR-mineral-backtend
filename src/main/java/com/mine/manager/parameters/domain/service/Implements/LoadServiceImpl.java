@@ -137,7 +137,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
             );
         }
         Lot lot = load.getLot();
-        if (lot.getCurrentDocNumber() != null && lot.getCurrentDocNumber().equals(load.getCurrentDocNumber())) {
+        /*if (lot.getCurrentDocNumber() != null && lot.getCurrentDocNumber().equals(load.getCurrentDocNumber())) {
 
             int nextDocNumber = lot.getCurrentDocNumber() - 1;
             if (nextDocNumber < lot.getInitialDocNumber()) {
@@ -147,7 +147,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
             }
 
             lotRepository.save(lot);
-        }
+        }*/
         load.setActive(false);
         loadRepository.save(load);
     }
