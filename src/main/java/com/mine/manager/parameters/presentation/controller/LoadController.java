@@ -102,7 +102,8 @@ public class LoadController {
             @RequestParam(required = false) LocalDate endDate,
             @RequestParam(required = false) String lotDescription,
             @RequestParam(required = false) String state,
-            @RequestParam(required = false) String some
+            @RequestParam(required = false) String some,
+            @RequestParam(required = false) Boolean active
     ) {
 
         LoadFilter filter = new LoadFilter(
@@ -112,7 +113,8 @@ public class LoadController {
                 endDate,
                 lotDescription,
                 state,
-                some
+                some,
+                active
         );
         List<LoadPojo> listFiltered = loadService.getFiltered(filter);
         return ResponseEntity.status(HttpStatus.OK).body(listFiltered);
@@ -132,7 +134,8 @@ public class LoadController {
             @RequestParam(required = false) LocalDate endDate,
             @RequestParam(required = false) String lotDescription,
             @RequestParam(required = false) String state,
-            @RequestParam(required = false) String some
+            @RequestParam(required = false) String some,
+            @RequestParam(required = false) Boolean active
     ) {
 
         LoadFilter filter = new LoadFilter(
@@ -142,7 +145,8 @@ public class LoadController {
                 endDate,
                 lotDescription,
                 state,
-                some
+                some,
+                active
         );
 
         PagePojo<LoadPojo> pageResult = loadService.getByPageAndFilters(

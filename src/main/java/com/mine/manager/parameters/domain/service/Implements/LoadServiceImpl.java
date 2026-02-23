@@ -54,7 +54,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
 
     @Override
     public List<LoadPojo> getLoads() {
-        List<Load> list = loadRepository.findAllByActiveIsTrue();
+        List<Load> list = loadRepository.findAll();
         return loadMapper.toPojoList(list);
     }
 
@@ -191,7 +191,7 @@ public class LoadServiceImpl extends CRUDServiceImpl<Load, Integer> implements
 
     private Specification<Load> generateSpecification(LoadFilter filter) {
         FieldsFilterUtil fields = new FieldsFilterUtil();
-        fields.addEqualsField("active", true);
+        fields.addEqualsField("active", filter.getActive());
         fields.addLikeField("correlativeLotCode", filter.getCorrelativeLotCode());
         fields.addLikeField("supplier.name", filter.getSupplierName());
         fields.addLikeField("state", filter.getState());

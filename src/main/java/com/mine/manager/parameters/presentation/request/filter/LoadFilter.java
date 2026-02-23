@@ -18,5 +18,6 @@ public class LoadFilter {
     private String lotDescription;
     private String state;
     private String some;
+    private Boolean active;
 
 }
